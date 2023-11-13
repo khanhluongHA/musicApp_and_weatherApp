@@ -14,3 +14,7 @@ class AuthLogin extends LoginEvent {
   @override
   List<Object> get props => [name, pass];
 }
+
+class CheckUser extends LoginEvent {
+  const CheckUser();
+}

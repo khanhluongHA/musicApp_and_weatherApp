@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_bloc/bloc/login_bloc.dart';
+import 'package:test_bloc/screens/home_app.dart';
 import 'package:test_bloc/widgets/custom_textfield_login.dart';
 
 class LoginPage extends StatefulWidget {
@@ -13,6 +14,12 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  // @override
+  // void dispose() {
+  //   userNameController.dispose();
+  //   passwordController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +52,16 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
                 width: MediaQuery.of(context).size.width * 0.6,
                 child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       blocRead.add(AuthLogin(
                           userNameController.text, passwordController.text));
+                      blocRead.add(const CheckUser());
+                      if (state.isLogin) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HomeApp()));
+                      }
                     },
                     child: const Text('Login')))
           ],
@@ -56,3 +70,39 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+
+Future<void> _showAlertDialog(BuildContext context) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        // <-- SEE HERE
+        title: Text('Tài khoản mật khẩu không chính xác',
+            style: TextStyle(color: Colors.red), textAlign: TextAlign.center),
+        content: const SingleChildScrollView(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('Xác nhận để thoát?'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                child: const Text('Ok'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        ],
+      );
+    },
+  );
+}
+// --- Button Widget --- //
