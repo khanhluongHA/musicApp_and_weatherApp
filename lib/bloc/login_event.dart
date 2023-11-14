@@ -18,3 +18,7 @@ class AuthLogin extends LoginEvent {
 class CheckUser extends LoginEvent {
   const CheckUser();
 }
+
+class RegisterAccount extends LoginEvent{
+  
+}
