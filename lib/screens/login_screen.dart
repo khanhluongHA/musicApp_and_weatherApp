@@ -10,7 +10,6 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
   final TextEditingController userNameController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
 
   @override
@@ -64,8 +63,6 @@ class LoginScreen extends StatelessWidget {
                         onPressed: () {
                           blocRead.add(AuthLogin(userNameController.text,
                               passwordController.text));
-                          blocRead.add(const CheckUser());
-
                           userNameController.text = '';
                           passwordController.text = '';
                         },

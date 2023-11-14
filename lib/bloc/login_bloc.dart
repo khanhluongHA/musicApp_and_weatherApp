@@ -10,17 +10,11 @@ List<UserModel> itemUsers = [UserModel(userName: 'abc', password: '123')];
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginState()) {
     on<AuthLogin>(authLogin);
-    on<CheckUser>(checkUser);
   }
 
   void authLogin(AuthLogin event, Emitter<LoginState> emit) {
     emit(state.copyWith(
         user: UserModel(userName: event.name, password: event.pass)));
-    printGreen(state.user!.userName);
-    printGreen(state.user!.password);
-  }
-
-  void checkUser(CheckUser event, Emitter<LoginState> emit) {
     for (int i = 0; i < itemUsers.length; i++) {
       if (itemUsers[i].userName == state.user!.userName &&
           itemUsers[i].password == state.user!.password) {
