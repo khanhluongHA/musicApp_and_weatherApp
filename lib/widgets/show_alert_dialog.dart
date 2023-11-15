@@ -22,7 +22,7 @@ Future<void> ShowAlertDialog({
             children: <Widget>[
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.5,
-                height: 70,
+                height: 60,
                 child: Text(
                   textAlign: TextAlign.center,
                   content,

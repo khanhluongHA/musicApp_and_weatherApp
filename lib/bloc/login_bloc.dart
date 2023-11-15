@@ -18,11 +18,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   void authLogin(AuthLogin event, Emitter<LoginState> emit) async {
-    emit(state.copyWith(
-        user: UserModel(userName: event.name, password: event.pass)));
     for (int i = 0; i < itemUsers.length; i++) {
-      if (itemUsers[i].userName == state.user!.userName &&
-          itemUsers[i].password == state.user!.password) {
+      if (itemUsers[i].userName == event.name &&
+          itemUsers[i].password == event.pass) {
         emit(state.copyWith(isLogin: true));
 
         printGreen('Tài khoản chính xác');
@@ -31,13 +29,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         final SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();
         sharedPreferences.setBool(SaveData.saveIsLogIn, true);
-        sharedPreferences.setString(
-            SaveData.saveUserName, state.user!.userName);
-        sharedPreferences.setString(
-            SaveData.savePassword, state.user!.password);
+        sharedPreferences.setString(SaveData.saveUserName, event.name);
+        sharedPreferences.setString(SaveData.savePassword, event.pass);
       } else {
         emit(state.copyWith(isLogin: false));
       }
+      emit(state.copyWith(
+          user: UserModel(userName: event.name.trim(), password: event.pass)));
     }
   }
 

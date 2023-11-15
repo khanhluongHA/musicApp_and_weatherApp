@@ -6,11 +6,11 @@ class CustomTextfieldLogin extends StatelessWidget {
       required this.labelText,
       required this.controller,
       this.isHide = false,
-      this.onChanged});
+});
   final TextEditingController controller;
   final String labelText;
   final bool isHide;
-  final VoidCallback? onChanged;
+
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +18,7 @@ class CustomTextfieldLogin extends StatelessWidget {
       height: 70,
       width: MediaQuery.of(context).size.width * 0.85,
       child: TextFormField(
-        onChanged: (value) {
-          onChanged!.call();
-        },
+      
         obscureText: isHide,
         controller: controller,
         decoration: InputDecoration(

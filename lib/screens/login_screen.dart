@@ -17,8 +17,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  bool isUser = false;
-  bool isPassword = false;
 
   @override
   Widget build(BuildContext context) {
@@ -57,17 +55,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomTextfieldLogin(
                       labelText: 'username',
                       controller: userNameController,
-                      onChanged: () {
-                        if (userNameController.text.length > 5) {
-                          setState(() {
-                            isUser = true;
-                          });
-                        } else {
-                          setState(() {
-                            isUser = false;
-                          });
-                        }
-                      },
                     ),
                     const SizedBox(
                       height: 30,
@@ -75,17 +62,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     InputPassword(
                       labelText: 'Password',
                       controller: passwordController,
-                      onChanged: () {
-                        if (passwordController.text.length > 5) {
-                          setState(() {
-                            isPassword = true;
-                          });
-                        } else {
-                          setState(() {
-                            isPassword = false;
-                          });
-                        }
-                      },
                     ),
                     const SizedBox(
                       height: 20,
@@ -95,8 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 40,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                getColorButton(isUser, isPassword)),
+                            backgroundColor: Colors.green),
                         onPressed: () {
                           blocRead.add(AuthLogin(userNameController.text,
                               passwordController.text));
@@ -135,13 +110,5 @@ class _LoginScreenState extends State<LoginScreen> {
                 ))),
       ),
     );
-  }
-}
-
-Color? getColorButton(bool isUser, bool isPass) {
-  if (isUser == true && isPass == true) {
-    return Colors.green;
-  } else {
-    return Colors.red.withOpacity(0.6);
   }
 }

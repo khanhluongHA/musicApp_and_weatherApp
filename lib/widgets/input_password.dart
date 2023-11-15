@@ -6,14 +6,14 @@ class InputPassword extends StatefulWidget {
       {super.key,
       required this.controller,
       this.isHidePassword = true,
-      this.onChanged,
+
       this.labelText = '',
       this.isError = false});
 
   late bool isHidePassword = true;
   final String labelText;
   final TextEditingController controller;
-  final VoidCallback? onChanged;
+
   bool isFocus = false;
   bool isError = false;
 
@@ -45,9 +45,7 @@ class _InputPasswordState extends State<InputPassword> {
       height: 70,
       width: MediaQuery.of(context).size.width * 0.85,
       child: TextFormField(
-        onChanged: (value) {
-          widget.onChanged!.call();
-        },
+       
         validator: validator,
         controller: widget.controller,
         focusNode: focusNode,
