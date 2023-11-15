@@ -1,30 +1,26 @@
 import 'package:flutter/material.dart';
 
-class CustomTextfieldLogin extends StatefulWidget {
-  const CustomTextfieldLogin({
-    super.key,
-    required this.labelText,
-    required this.controller,
-  });
+class CustomTextfieldLogin extends StatelessWidget {
+  const CustomTextfieldLogin(
+      {super.key,
+      required this.labelText,
+      required this.controller,
+      this.isHide = false});
   final TextEditingController controller;
-
   final String labelText;
+  final bool isHide;
 
-  @override
-  State<CustomTextfieldLogin> createState() => _CustomTextfieldLoginState();
-}
-
-class _CustomTextfieldLoginState extends State<CustomTextfieldLogin> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 70,
       width: MediaQuery.of(context).size.width * 0.85,
       child: TextFormField(
-        controller: widget.controller,
+        obscureText: isHide,
+        controller: controller,
         decoration: InputDecoration(
           isDense: true,
-          labelText: widget.labelText,
+          labelText: labelText,
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
                 width: 1, color: Colors.grey.withOpacity(0.6)), //<-- SEE HERE

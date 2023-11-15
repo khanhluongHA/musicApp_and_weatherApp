@@ -8,9 +8,6 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 List<UserModel> itemUsers = [UserModel(userName: 'abc', password: '123')];
-late bool dataIsLogin;
-late final String dataUserName;
-late final String dataPassword;
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginState()) {
@@ -46,7 +43,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(isLogin: false));
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    sharedPreferences.setBool(SaveData.saveIsLogIn, false);
+    sharedPreferences.remove(SaveData.saveIsLogIn);
     sharedPreferences.remove(SaveData.saveUserName);
     sharedPreferences.remove(SaveData.savePassword);
   }

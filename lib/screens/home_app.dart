@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_bloc/bloc/login_bloc.dart';
-import 'package:test_bloc/config/print_color.dart';
 import 'package:test_bloc/config/save_data.dart';
 import 'package:test_bloc/screens/login_screen.dart';
 
@@ -47,11 +46,11 @@ class _HomeAppState extends State<HomeApp> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'username: ${userName}',
+                  'username: $userName',
                   style: const TextStyle(color: Colors.green, fontSize: 25),
                 ),
                 Text(
-                  'password: ${password}',
+                  'password: $password',
                   style: const TextStyle(color: Colors.red, fontSize: 25),
                 ),
                 const SizedBox(
@@ -63,7 +62,7 @@ class _HomeAppState extends State<HomeApp> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => LoginScreen()));
+                              builder: (context) =>  LoginScreen()));
                     },
                     child: const Text('Thoát'))
               ]),
