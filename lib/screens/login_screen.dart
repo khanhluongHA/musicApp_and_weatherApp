@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_bloc/bloc/login_bloc.dart';
@@ -10,6 +12,7 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
   final TextEditingController userNameController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
 
   @override
