@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_bloc/config/print_color.dart';
 import 'package:test_bloc/config/save_data.dart';
@@ -8,6 +9,7 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 List<UserModel> itemUsers = [UserModel(userName: 'abc', password: '123')];
+final formKey = GlobalKey<FormState>();
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginState()) {

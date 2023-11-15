@@ -16,6 +16,7 @@ class RegisterScreen extends StatelessWidget {
         TextEditingController();
 
     return Scaffold(
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Center(
           child: BlocListener<RegisterBloc, RegisterState>(

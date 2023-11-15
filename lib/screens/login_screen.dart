@@ -4,14 +4,21 @@ import 'package:test_bloc/bloc/login_bloc.dart';
 import 'package:test_bloc/screens/home_app.dart';
 import 'package:test_bloc/screens/register_screen.dart';
 import 'package:test_bloc/widgets/custom_textfield_login.dart';
+import 'package:test_bloc/widgets/input_password.dart';
 import 'package:test_bloc/widgets/show_alert_dialog.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
 
-  final TextEditingController userNameController = TextEditingController();
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController userNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  bool isUser = false;
+  bool isPassword = false;
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +55,38 @@ class LoginScreen extends StatelessWidget {
                       height: 50,
                     ),
                     CustomTextfieldLogin(
-                        labelText: 'username', controller: userNameController),
+                      labelText: 'username',
+                      controller: userNameController,
+                      onChanged: () {
+                        if (userNameController.text.length > 5) {
+                          setState(() {
+                            isUser = true;
+                          });
+                        } else {
+                          setState(() {
+                            isUser = false;
+                          });
+                        }
+                      },
+                    ),
                     const SizedBox(
                       height: 30,
                     ),
-                    CustomTextfieldLogin(
-                        labelText: 'password', controller: passwordController),
+                    InputPassword(
+                      labelText: 'Password',
+                      controller: passwordController,
+                      onChanged: () {
+                        if (passwordController.text.length > 5) {
+                          setState(() {
+                            isPassword = true;
+                          });
+                        } else {
+                          setState(() {
+                            isPassword = false;
+                          });
+                        }
+                      },
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -61,6 +94,9 @@ class LoginScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.7,
                       height: 40,
                       child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                getColorButton(isUser, isPassword)),
                         onPressed: () {
                           blocRead.add(AuthLogin(userNameController.text,
                               passwordController.text));
@@ -99,5 +135,13 @@ class LoginScreen extends StatelessWidget {
                 ))),
       ),
     );
+  }
+}
+
+Color? getColorButton(bool isUser, bool isPass) {
+  if (isUser == true && isPass == true) {
+    return Colors.green;
+  } else {
+    return Colors.red.withOpacity(0.6);
   }
 }
