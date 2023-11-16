@@ -26,7 +26,9 @@ class RegisterScreen extends StatelessWidget {
     final RegisterBloc blocRead = context.read<RegisterBloc>();
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+      ),
       body: SingleChildScrollView(
         child: Center(
           child: BlocListener<RegisterBloc, RegisterState>(

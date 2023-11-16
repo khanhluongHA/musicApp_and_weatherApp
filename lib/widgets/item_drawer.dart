@@ -29,7 +29,7 @@ class ItemDrawer extends StatelessWidget {
             const SizedBox(width: 20),
             Text(
               textButton,
-              style: TextStyle(color: Colors.black, fontSize: 16),
+              style: const TextStyle(color: Colors.black, fontSize: 16),
             ),
           ],
         ),

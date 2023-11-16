@@ -42,7 +42,7 @@ class _HomeAppState extends State<HomeApp> {
         return false;
       },
       child: Scaffold(
-        drawer: const DrawerApp(),
+        drawer:  DrawerApp(),
         appBar: AppBar(
           title: Text('Danh sách ghi chú'),
           backgroundColor: Colors.green,
