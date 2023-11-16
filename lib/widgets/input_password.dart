@@ -42,7 +42,7 @@ class _InputPasswordState extends State<InputPassword> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 70,
-      width: MediaQuery.of(context).size.width * 0.85,
+      width: MediaQuery.of(context).size.width * 0.9,
       child: TextFormField(
         validator: _checkValidator,
         controller: widget.controller,
@@ -119,8 +119,15 @@ Widget getSuffixIcon(
 }
 
 String? _checkValidator(String? value) {
-  if (value == null || value.isEmpty || value.length < 5) {
-    return 'Chưa thỏa mãn điều kiện password !';
+  RegExp regex =
+      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+  if (value!.isEmpty) {
+    return 'Vui long hập mật khẩu !';
+  } else {
+    if (!regex.hasMatch(value)) {
+      return 'Chưa đáp ứng đủ điều kiện của mật khẩu !';
+    } else {
+      return null;
+    }
   }
-  return null;
 }

@@ -15,7 +15,7 @@ class CustomTextfieldLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 70,
-      width: MediaQuery.of(context).size.width * 0.85,
+      width: MediaQuery.of(context).size.width * 0.9,
       child: TextFormField(
         validator: _checkValidator,
         obscureText: isHide,

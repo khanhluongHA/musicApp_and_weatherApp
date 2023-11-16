@@ -8,7 +8,7 @@ Future<void> ShowAlertDialog({
   required String title,
   required String content,
   required VoidCallback onPressed,
-  required Enum StatusDialog,
+  required Enum statusDialog,
 }) async {
   return showDialog<void>(
     context: context,
@@ -17,7 +17,7 @@ Future<void> ShowAlertDialog({
       return AlertDialog(
         // <-- SEE HERE
         title: Text(title,
-            style: TextStyle(color: getStatusDialog(StatusDialog)),
+            style: TextStyle(color: getStatusDialog(statusDialog)),
             textAlign: TextAlign.center),
         content: SingleChildScrollView(
           child: Row(
@@ -28,7 +28,7 @@ Future<void> ShowAlertDialog({
                 child: Text(
                   textAlign: TextAlign.center,
                   content,
-                  style: TextStyle(color: getStatusDialog(StatusDialog)),
+                  style: TextStyle(color: getStatusDialog(statusDialog)),
                 ),
               ),
             ],
@@ -41,7 +41,7 @@ Future<void> ShowAlertDialog({
               TextButton(
                 child: Text(
                   'Ok',
-                  style: TextStyle(color: getStatusDialog(StatusDialog)),
+                  style: TextStyle(color: getStatusDialog(statusDialog)),
                 ),
                 onPressed: () {
                   onPressed.call();

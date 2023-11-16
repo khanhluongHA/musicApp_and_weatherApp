@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             builder: (context) => const HomeApp()));
                   } else {
                     ShowAlertDialog(
-                      StatusDialog: StatusDialog.error,
+                      statusDialog: StatusDialog.error,
                       context: context,
                       title: 'Lỗi',
                       content: 'Nhấn ok để tiếp tục đăng nhập',
@@ -66,11 +66,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 50,
                       ),
                       CustomTextfieldLogin(
-                        labelText: 'username',
+                        labelText: 'Username',
                         controller: userNameController,
                       ),
                       const SizedBox(
-                        height: 30,
+                        height: 15,
                       ),
                       InputPassword(
                         labelText: 'Password',

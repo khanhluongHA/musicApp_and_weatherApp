@@ -33,7 +33,7 @@ class RegisterScreen extends StatelessWidget {
             listener: (context, state) {
               state.isRegister
                   ? ShowAlertDialog(
-                      StatusDialog: StatusDialog.success,
+                      statusDialog: StatusDialog.success,
                       context: context,
                       title: 'Đăng ký thành công',
                       content: 'Nhấn ok để đăng nhập',
@@ -47,7 +47,7 @@ class RegisterScreen extends StatelessWidget {
                       },
                     )
                   : ShowAlertDialog(
-                      StatusDialog: StatusDialog.warning,
+                      statusDialog: StatusDialog.warning,
                       context: context,
                       title: 'Đăng thất bại !',
                       content: 'Nhấn ok để tiếp tục đăng ký,',
