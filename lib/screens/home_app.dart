@@ -63,7 +63,9 @@ class _HomeAppState extends State<HomeApp> {
                   blocRead.add(Logout());
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const LoginScreen(),),
+                    MaterialPageRoute(
+                      builder: (context) => LoginScreen(),
+                    ),
                   );
                 },
               ),

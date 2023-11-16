@@ -10,7 +10,7 @@ import 'package:test_bloc/widgets/input_password.dart';
 import 'package:test_bloc/widgets/show_alert_dialog.dart';
 
 class RegisterScreen extends StatelessWidget {
-   RegisterScreen({super.key});
+  RegisterScreen({super.key});
 
   final formKeyRegister = GlobalKey<FormState>();
 
@@ -33,6 +33,7 @@ class RegisterScreen extends StatelessWidget {
             listener: (context, state) {
               state.isRegister
                   ? ShowAlertDialog(
+                      StatusDialog: StatusDialog.success,
                       context: context,
                       title: 'Đăng ký thành công',
                       content: 'Nhấn ok để đăng nhập',
@@ -46,6 +47,7 @@ class RegisterScreen extends StatelessWidget {
                       },
                     )
                   : ShowAlertDialog(
+                      StatusDialog: StatusDialog.warning,
                       context: context,
                       title: 'Đăng thất bại !',
                       content: 'Nhấn ok để tiếp tục đăng ký,',

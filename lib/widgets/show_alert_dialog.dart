@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
+enum StatusDialog { success, error, warning }
+
 // ignore: non_constant_identifier_names
 Future<void> ShowAlertDialog({
   required BuildContext context,
   required String title,
   required String content,
   required VoidCallback onPressed,
+  required Enum StatusDialog,
 }) async {
   return showDialog<void>(
     context: context,
@@ -14,7 +17,7 @@ Future<void> ShowAlertDialog({
       return AlertDialog(
         // <-- SEE HERE
         title: Text(title,
-            style: const TextStyle(color: Colors.green),
+            style: TextStyle(color: getStatusDialog(StatusDialog)),
             textAlign: TextAlign.center),
         content: SingleChildScrollView(
           child: Row(
@@ -22,10 +25,10 @@ Future<void> ShowAlertDialog({
             children: <Widget>[
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.5,
-                height: 60,
                 child: Text(
                   textAlign: TextAlign.center,
                   content,
+                  style: TextStyle(color: getStatusDialog(StatusDialog)),
                 ),
               ),
             ],
@@ -36,7 +39,10 @@ Future<void> ShowAlertDialog({
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextButton(
-                child: const Text('Ok'),
+                child: Text(
+                  'Ok',
+                  style: TextStyle(color: getStatusDialog(StatusDialog)),
+                ),
                 onPressed: () {
                   onPressed.call();
                 },
@@ -48,4 +54,13 @@ Future<void> ShowAlertDialog({
     },
   );
 }
-// --- Button Widget --- //
+
+Color getStatusDialog(Enum status) {
+  if (status == StatusDialog.success) {
+    return Colors.green;
+  } else if (status == StatusDialog.error) {
+    return Colors.red;
+  } else {
+    return Colors.orange;
+  }
+}

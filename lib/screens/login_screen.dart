@@ -41,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             builder: (context) => const HomeApp()));
                   } else {
                     ShowAlertDialog(
+                      StatusDialog: StatusDialog.error,
                       context: context,
                       title: 'Lỗi',
                       content: 'Nhấn ok để tiếp tục đăng nhập',
@@ -58,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 100,
                       ),
                       const Text(
-                        'Login',
+                        'Đăng nhập',
                         style: TextStyle(color: Colors.green, fontSize: 50),
                       ),
                       const SizedBox(
