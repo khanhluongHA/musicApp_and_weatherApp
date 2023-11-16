@@ -6,7 +6,6 @@ class InputPassword extends StatefulWidget {
       {super.key,
       required this.controller,
       this.isHidePassword = true,
-
       this.labelText = '',
       this.isError = false});
 
@@ -45,8 +44,7 @@ class _InputPasswordState extends State<InputPassword> {
       height: 70,
       width: MediaQuery.of(context).size.width * 0.85,
       child: TextFormField(
-       
-        validator: validator,
+        validator: _checkValidator,
         controller: widget.controller,
         focusNode: focusNode,
         obscureText: widget.isHidePassword,
@@ -120,9 +118,9 @@ Widget getSuffixIcon(
       ));
 }
 
-String? validator(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'Vui lòng nhập dữ liệu';
+String? _checkValidator(String? value) {
+  if (value == null || value.isEmpty || value.length < 5) {
+    return 'Chưa thỏa mãn điều kiện password !';
   }
   return null;
 }

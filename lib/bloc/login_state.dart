@@ -8,8 +8,8 @@ class LoginState extends Equatable {
   });
 
   final UserModel? user;
-
   bool isLogin;
+ 
 
   LoginState copyWith({UserModel? user, bool? isLogin}) {
     return LoginState(

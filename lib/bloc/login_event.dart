@@ -15,6 +15,6 @@ class AuthLogin extends LoginEvent {
   List<Object> get props => [name, pass];
 }
 
-class Logout extends LoginEvent{
-  
-}
+class Logout extends LoginEvent {}
+
+class CheckValidator extends LoginEvent {}

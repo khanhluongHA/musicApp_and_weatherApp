@@ -8,8 +8,7 @@ import 'package:test_bloc/models/user_model.dart';
 part 'login_event.dart';
 part 'login_state.dart';
 
-List<UserModel> itemUsers = [UserModel(userName: 'abc', password: '123')];
-final formKey = GlobalKey<FormState>();
+List<UserModel> itemUsers = [UserModel(userName: '11111', password: '22222')];
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginState()) {
@@ -19,7 +18,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void authLogin(AuthLogin event, Emitter<LoginState> emit) async {
     for (int i = 0; i < itemUsers.length; i++) {
-      if (itemUsers[i].userName == event.name &&
+      if (itemUsers[i].userName == event.name.trim() &&
           itemUsers[i].password == event.pass) {
         emit(state.copyWith(isLogin: true));
 
@@ -29,7 +28,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         final SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();
         sharedPreferences.setBool(SaveData.saveIsLogIn, true);
-        sharedPreferences.setString(SaveData.saveUserName, event.name);
+        sharedPreferences.setString(SaveData.saveUserName, event.name.trim());
         sharedPreferences.setString(SaveData.savePassword, event.pass);
       } else {
         emit(state.copyWith(isLogin: false));

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CustomTextfieldLogin extends StatelessWidget {
-  const CustomTextfieldLogin(
-      {super.key,
-      required this.labelText,
-      required this.controller,
-      this.isHide = false,
-});
+  const CustomTextfieldLogin({
+    super.key,
+    required this.labelText,
+    required this.controller,
+    this.isHide = false,
+  });
   final TextEditingController controller;
   final String labelText;
   final bool isHide;
-
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class CustomTextfieldLogin extends StatelessWidget {
       height: 70,
       width: MediaQuery.of(context).size.width * 0.85,
       child: TextFormField(
-      
+        validator: _checkValidator,
         obscureText: isHide,
         controller: controller,
         decoration: InputDecoration(
@@ -48,4 +47,11 @@ class CustomTextfieldLogin extends StatelessWidget {
       ),
     );
   }
+}
+
+String? _checkValidator(String? value) {
+  if (value == null || value.isEmpty || value.length < 5) {
+    return 'Chưa thỏa mãn điều kiện username !';
+  }
+  return null;
 }
