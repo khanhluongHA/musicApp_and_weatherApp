@@ -1,15 +1,19 @@
 part of 'note_bloc.dart';
 
-class NoteState extends Equatable {
-  const NoteState({this.notes = const []});
-  final List<ItemNoteModel> notes;
+enum StatusNoteState { start, end }
 
-  NoteState copyWith({List<ItemNoteModel>? notes}) {
+class NoteState extends Equatable {
+  final List<ItemNoteModel> notes;
+  final Enum status;
+  const NoteState({this.notes = const [], this.status = StatusNoteState.start});
+
+  NoteState copyWith({List<ItemNoteModel>? notes, Enum? status}) {
     return NoteState(
       notes: notes ?? this.notes,
+      status: status ?? this.status,
     );
   }
 
   @override
-  List<Object> get props => [notes];
+  List<Object> get props => [notes, status];
 }

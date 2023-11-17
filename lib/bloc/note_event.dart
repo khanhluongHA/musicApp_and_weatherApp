@@ -27,3 +27,5 @@ class RemoveNote extends NoteEvent {
     this.removeIndex = 0,
   });
 }
+
+class GetDataNote extends NoteEvent{}

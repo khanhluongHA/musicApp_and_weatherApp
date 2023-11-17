@@ -19,7 +19,7 @@ class ItemNote extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: Colors.grey.withOpacity(0.2),
+        color: Colors.grey.withOpacity(0.5),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,8 +28,11 @@ class ItemNote extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'Tiêu đê: ',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                'Tiêu đề: ',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xFF6499E9)),
               ),
               Text(
                 timeNote,
@@ -37,14 +40,28 @@ class ItemNote extends StatelessWidget {
               ),
             ],
           ),
-          Text(overflow: TextOverflow.ellipsis, titleNote),
+          Text(
+            overflow: TextOverflow.ellipsis,
+            titleNote,
+            style: TextStyle(fontSize: 13),
+          ),
+          SizedBox(
+            height: 5,
+          ),
           const Text(
             'Nội dung: ',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFF6499E9)),
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width,
-            child: Text(overflow: TextOverflow.ellipsis, contentNote),
+            child: Text(
+              overflow: TextOverflow.ellipsis,
+              contentNote,
+              style: TextStyle(fontSize: 13),
+            ),
           ),
           const SizedBox(
             height: 5,
@@ -56,7 +73,7 @@ class ItemNote extends StatelessWidget {
                 height: 35,
                 width: 30,
                 decoration: BoxDecoration(
-                  color: Colors.blue.withOpacity(0.1),
+                  color: Colors.blue.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: const Icon(Icons.edit),
@@ -72,7 +89,7 @@ class ItemNote extends StatelessWidget {
                   height: 35,
                   width: 30,
                   decoration: BoxDecoration(
-                    color: Colors.blue.withOpacity(0.1),
+                    color: Colors.blue.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: const Icon(

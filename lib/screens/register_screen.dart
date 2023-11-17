@@ -25,7 +25,7 @@ class RegisterScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Color(0xFF83A2FF),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -65,7 +65,7 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   const Text(
                     'Đăng ký',
-                    style: TextStyle(color: Colors.green, fontSize: 50),
+                    style: TextStyle(color: Color(0xFF83A2FF), fontSize: 50),
                   ),
                   const SizedBox(
                     height: 30,

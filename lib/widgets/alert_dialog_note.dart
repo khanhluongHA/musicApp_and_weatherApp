@@ -8,22 +8,21 @@ Future<void> AlertDialogNote({
   required VoidCallback onPressed,
   required TextEditingController titleController,
   required TextEditingController contentController,
-
 }) async {
   return showDialog<void>(
-    
     context: context,
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
         // <-- SEE HERE
         title: Text(title,
-            style: const TextStyle(color: Colors.blue),
+            style: const TextStyle(
+                color: Colors.black, fontWeight: FontWeight.w300),
             textAlign: TextAlign.center),
         content: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.3,
+          height: MediaQuery.of(context).size.height * 0.27,
           width: MediaQuery.of(context).size.width * 0.95,
-          child:  Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               SizedBox(
@@ -42,11 +41,11 @@ Future<void> AlertDialogNote({
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 20,
               ),
               TextField(
                 controller: contentController,
-                maxLines: 6,
+                maxLines: 4,
                 decoration: const InputDecoration(
                   labelText: 'Nội dung',
                   border: OutlineInputBorder(
@@ -74,7 +73,7 @@ Future<void> AlertDialogNote({
               TextButton(
                 child: const Text(
                   'Lưu',
-                  style: TextStyle(color: Colors.green),
+                  style: TextStyle(color: Color(0xFF83A2FF)),
                 ),
                 onPressed: () {
                   onPressed.call();

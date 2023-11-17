@@ -41,7 +41,7 @@ class DrawerApp extends StatelessWidget {
         Container(
           padding: const EdgeInsets.only(left: 20),
           height: MediaQuery.of(context).size.height * 0.3,
-          color: Colors.green,
+          color: Color(0xFF83A2FF),
           alignment: Alignment.centerLeft,
           child: Row(
             children: [
@@ -49,11 +49,10 @@ class DrawerApp extends StatelessWidget {
                 height: 80,
                 width: 80,
                 decoration: BoxDecoration(
-                    color: Colors.blue,
                     borderRadius: BorderRadius.circular(40),
                     image: const DecorationImage(
-                        image: NetworkImage(
-                            'https://ss-images.saostar.vn/wwebp700/2018/06/10/2968571/34689401_2147325555551794_7654281988110548992_n.jpg'))),
+                        image: AssetImage('assets/images/avatar.jpg'),
+                        fit: BoxFit.cover)),
               ),
               const SizedBox(
                 width: 10,
@@ -63,12 +62,12 @@ class DrawerApp extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Xin chào:  meomeo',
-                    style: TextStyle(color: Colors.white, fontSize: 15),
+                    'Thanh Xuân',
+                    style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                   Text(
                     '0987654321',
-                    style: TextStyle(color: Colors.white, fontSize: 15),
+                    style: TextStyle(color: Colors.white, fontSize: 13),
                   ),
                 ],
               )

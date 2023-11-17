@@ -39,12 +39,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
-  void logout(LoginEvent event, Emitter<LoginState> emit) async {
+  Future<void> logout(LoginEvent event, Emitter<LoginState> emit) async {
     emit(state.copyWith(isLogin: false));
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     sharedPreferences.remove(SaveData.saveIsLogIn);
     sharedPreferences.remove(SaveData.saveUserName);
     sharedPreferences.remove(SaveData.savePassword);
+
+    sharedPreferences.setStringList(SaveData.saveTitle, []);
+    sharedPreferences.setStringList(SaveData.saveContent, []);
+    sharedPreferences.setStringList(SaveData.saveTime, []);
+    printCyan('text');
   }
 }

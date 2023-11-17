@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const Text(
                         'Đăng nhập',
-                        style: TextStyle(color: Colors.green, fontSize: 50),
+                        style: TextStyle(color: Color(0xFF83A2FF), fontSize: 50),
                       ),
                       const SizedBox(
                         height: 50,

@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_bloc/bloc/note_bloc.dart';
 import 'package:test_bloc/config/print_color.dart';
 import 'package:test_bloc/config/save_data.dart';
-import 'package:test_bloc/models/item_note_model.dart';
 import 'package:test_bloc/widgets/alert_dialog_note.dart';
 import 'package:test_bloc/widgets/drawer_app.dart';
 import 'package:test_bloc/widgets/item_note.dart';
@@ -21,6 +20,7 @@ class _HomeAppState extends State<HomeApp> {
   String password = '';
   TextEditingController titleController = TextEditingController();
   TextEditingController contentController = TextEditingController();
+  late NoteBloc noteBloc;
 
   void _getData() async {
     final SharedPreferences sharedPreferences =
@@ -33,7 +33,9 @@ class _HomeAppState extends State<HomeApp> {
 
   @override
   void initState() {
+    noteBloc = context.read<NoteBloc>();
     _getData();
+    noteBloc.add(GetDataNote());
     super.initState();
   }
 
@@ -58,15 +60,6 @@ class _HomeAppState extends State<HomeApp> {
               content: '',
               title: 'Thêm ghi chú',
               onPressed: () {
-                setState(() {
-                  listNote.add(
-                    ItemNoteModel(
-                      title: titleController.text,
-                      content: contentController.text,
-                      time: getTime(),
-                    ),
-                  );
-                });
                 noteBloc.add(AddNote(
                   newTitle: titleController.text,
                   newContent: contentController.text,
@@ -82,39 +75,46 @@ class _HomeAppState extends State<HomeApp> {
         drawer: const DrawerApp(),
         appBar: AppBar(
           title: const Text('Danh sách ghi chú'),
-          backgroundColor: Colors.green,
+          backgroundColor: Color(0xFF83A2FF),
         ),
         body: BlocBuilder<NoteBloc, NoteState>(
-          buildWhen: (previous, current) =>
-              previous.notes.length != current.notes.length,
           builder: (context, state) {
-            return Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ListView.separated(
-                        itemBuilder: (context, index) {
-                          return ItemNote(
-                            titleNote: state.notes[index].title,
-                            contentNote: state.notes[index].content,
-                            timeNote: state.notes[index].time,
-                            onTapDelete: () {
-                              setState(() {
-                                listNote.removeAt(index);
-                              });
-                              noteBloc.add(RemoveNote(removeIndex: index));
-                            },
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return const SizedBox(
-                            height: 10,
-                          );
-                        },
-                        itemCount: state.notes.length),
-                  ),
-                ],
+            return Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                Color(
+                  0xFFFFC5C5,
+                ),
+                Color(0xFF89B9AD)
+              ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: ListView.separated(
+                          padding: EdgeInsets.only(bottom: 65),
+                          itemBuilder: (context, index) {
+                            return ItemNote(
+                              titleNote: state.notes[index].title,
+                              contentNote: state.notes[index].content,
+                              timeNote: state.notes[index].time,
+                              onTapDelete: () {
+                                noteBloc.add(RemoveNote(removeIndex: index));
+                              },
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(
+                              height: 10,
+                            );
+                          },
+                          itemCount: state.notes.length),
+                    ),
+                  ],
+                ),
               ),
             );
           },
