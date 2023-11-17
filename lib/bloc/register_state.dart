@@ -1,7 +1,7 @@
 part of 'register_bloc.dart';
 
 class RegisterState extends Equatable {
-  RegisterState({
+  const RegisterState({
     this.username = '',
     this.password = '',
     this.confirmPassword = '',

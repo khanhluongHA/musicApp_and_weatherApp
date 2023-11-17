@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:test_bloc/bloc/login_bloc.dart';
 import 'package:test_bloc/config/save_data.dart';
-import 'package:test_bloc/screens/login_screen.dart';
-import 'package:test_bloc/widgets/button_submit.dart';
+import 'package:test_bloc/widgets/alert_dialog_note.dart';
 import 'package:test_bloc/widgets/drawer_app.dart';
+import 'package:test_bloc/widgets/item_note.dart';
 
 class HomeApp extends StatefulWidget {
   const HomeApp({super.key});
@@ -35,23 +33,39 @@ class _HomeAppState extends State<HomeApp> {
 
   @override
   Widget build(BuildContext context) {
-    final LoginBloc blocRead = context.read<LoginBloc>();
-
     return WillPopScope(
       onWillPop: () async {
         return false;
       },
       child: Scaffold(
-        drawer:  DrawerApp(),
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(
+            Icons.add,
+            size: 30,
+          ),
+          onPressed: () {
+            AlertDialogNote(
+              context: context,
+              content: '',
+              title: 'Thêm ghi chú',
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            );
+          },
+        ),
+        drawer: const DrawerApp(),
         appBar: AppBar(
-          title: Text('Danh sách ghi chú'),
+          title: const Text('Danh sách ghi chú'),
           backgroundColor: Colors.green,
         ),
-        body: Center(
+        body: Padding(
+          padding: const EdgeInsets.all(20),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [],
+            children: [
+              ItemNote(),
+            ],
           ),
         ),
       ),

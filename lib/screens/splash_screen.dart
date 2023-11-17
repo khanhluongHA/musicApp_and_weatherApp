@@ -28,12 +28,12 @@ class _SplashScreenState extends State<SplashScreen> {
         } else {
           // ignore: use_build_context_synchronously
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => LoginScreen()));
+              context, MaterialPageRoute(builder: (context) => const LoginScreen()));
         }
       } else {
         // ignore: use_build_context_synchronously
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginScreen()));
+            context, MaterialPageRoute(builder: (context) => const LoginScreen()));
       }
     });
   }

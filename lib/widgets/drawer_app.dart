@@ -35,22 +35,22 @@ class DrawerApp extends StatelessWidget {
           },
           title: 'Logout'),
     ];
-    
+
     return Drawer(
       child: Column(children: [
         Container(
           padding: const EdgeInsets.only(left: 20),
-          height: 230,
+          height: MediaQuery.of(context).size.height * 0.3,
           color: Colors.green,
           alignment: Alignment.centerLeft,
           child: Row(
             children: [
               Container(
-                height: 100,
-                width: 100,
+                height: 80,
+                width: 80,
                 decoration: BoxDecoration(
                     color: Colors.blue,
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(40),
                     image: const DecorationImage(
                         image: NetworkImage(
                             'https://ss-images.saostar.vn/wwebp700/2018/06/10/2968571/34689401_2147325555551794_7654281988110548992_n.jpg'))),
@@ -60,14 +60,15 @@ class DrawerApp extends StatelessWidget {
               ),
               const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Xin chào:  meomeo',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white, fontSize: 15),
                   ),
                   Text(
                     '0987654321',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white, fontSize: 15),
                   ),
                 ],
               )
@@ -76,6 +77,7 @@ class DrawerApp extends StatelessWidget {
         ),
         Expanded(
             child: ListView.builder(
+          padding: const EdgeInsets.all(0),
           itemCount: itemDrawers.length,
           itemBuilder: (context, index) {
             return ItemDrawer(

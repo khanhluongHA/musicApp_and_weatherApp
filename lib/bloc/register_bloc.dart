@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:test_bloc/bloc/login_bloc.dart';
 import 'package:test_bloc/config/print_color.dart';
 import 'package:test_bloc/models/user_model.dart';
@@ -9,7 +8,7 @@ part 'register_event.dart';
 part 'register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
-  RegisterBloc() : super(RegisterState()) {
+  RegisterBloc() : super(const RegisterState()) {
     on<RegisterCheck>(registerCheck);
   }
 
