@@ -6,8 +6,12 @@ Future<void> AlertDialogNote({
   required String title,
   required String content,
   required VoidCallback onPressed,
+  required TextEditingController titleController,
+  required TextEditingController contentController,
+
 }) async {
   return showDialog<void>(
+    
     context: context,
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
@@ -19,13 +23,14 @@ Future<void> AlertDialogNote({
         content: SizedBox(
           height: MediaQuery.of(context).size.height * 0.3,
           width: MediaQuery.of(context).size.width * 0.95,
-          child: const Column(
+          child:  Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               SizedBox(
                 height: 40,
                 child: TextField(
-                  decoration: InputDecoration(
+                  controller: titleController,
+                  decoration: const InputDecoration(
                     labelText: 'Tiêu đề',
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -36,12 +41,13 @@ Future<void> AlertDialogNote({
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               TextField(
+                controller: contentController,
                 maxLines: 6,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Nội dung',
                   border: OutlineInputBorder(
                     borderSide: BorderSide(

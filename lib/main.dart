@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_bloc/bloc/login_bloc.dart';
+import 'package:test_bloc/bloc/note_bloc.dart';
 import 'package:test_bloc/bloc/register_bloc.dart';
 import 'package:test_bloc/screens/splash_screen.dart';
 
@@ -27,6 +27,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => RegisterBloc(),
+        ),
+        BlocProvider(
+          create: (context) => NoteBloc(),
         ),
       ],
       child: const MaterialApp(

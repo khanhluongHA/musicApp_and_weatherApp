@@ -4,4 +4,7 @@ class SaveData {
   static const String saveIsLogIn = 'SAVE_IS_LOG_IN';
   static const String saveUserName = 'SAVE_USER_NAME';
   static const String savePassword = 'SAVE_PASSWORD';
+  static const String saveTitle = 'SAVE_TITLE';
+  static const String saveContent = 'SAVE_CONTENT';
+  static const String saveTime = 'SAVE_TIME';
 }

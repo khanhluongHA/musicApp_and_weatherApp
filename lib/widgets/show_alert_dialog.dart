@@ -55,10 +55,10 @@ Future<void> ShowAlertDialog({
   );
 }
 
-Color getStatusDialog(Enum status) {
-  if (status == StatusDialog.success) {
+Color getStatusDialog(Enum statusAlerDialog) {
+  if (statusAlerDialog == StatusDialog.success) {
     return Colors.green;
-  } else if (status == StatusDialog.error) {
+  } else if (statusAlerDialog == StatusDialog.error) {
     return Colors.red;
   } else {
     return Colors.orange;
