@@ -1,7 +1,7 @@
 class ItemNoteModel {
-  final String title;
-  final String content;
-  final String time;
+  late String title;
+  late String content;
+  late String time;
 
   ItemNoteModel({
     required this.title,

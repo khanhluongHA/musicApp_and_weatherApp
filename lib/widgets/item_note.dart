@@ -1,16 +1,21 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 class ItemNote extends StatelessWidget {
-  const ItemNote(
-      {super.key,
-      this.titleNote = '',
-      this.contentNote = '',
-      this.timeNote = '',
-      required this.onTapDelete});
+  const ItemNote({
+    super.key,
+    this.titleNote = '',
+    this.contentNote = '',
+    this.timeNote = '',
+    required this.onTapDelete,
+    required this.onTapChanged,
+  });
   final String titleNote;
   final String contentNote;
   final String timeNote;
   final VoidCallback onTapDelete;
+  final VoidCallback onTapChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,7 @@ class ItemNote extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: Colors.grey.withOpacity(0.5),
+        color: Colors.grey.withOpacity(0.3),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,14 +74,19 @@ class ItemNote extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Container(
-                height: 35,
-                width: 30,
-                decoration: BoxDecoration(
-                  color: Colors.blue.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(8),
+              InkWell(
+                onTap: () {
+                  onTapChanged.call();
+                },
+                child: Container(
+                  height: 35,
+                  width: 30,
+                  decoration: BoxDecoration(
+                    color: Colors.blue.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Icon(Icons.edit),
                 ),
-                child: const Icon(Icons.edit),
               ),
               const SizedBox(
                 width: 15,

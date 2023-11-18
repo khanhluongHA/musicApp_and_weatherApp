@@ -44,7 +44,7 @@ class _InputPasswordState extends State<InputPassword> {
       height: 70,
       width: MediaQuery.of(context).size.width * 0.9,
       child: TextFormField(
-        validator: _checkValidator,
+        validator: _checkValidatorPassword,
         controller: widget.controller,
         focusNode: focusNode,
         obscureText: widget.isHidePassword,
@@ -130,4 +130,11 @@ String? _checkValidator(String? value) {
       return null;
     }
   }
+}
+
+String? _checkValidatorPassword(String? value) {
+  if (value == null || value.isEmpty || value.length < 5) {
+    return 'Vui lòng nhập tiêu đề !';
+  }
+  return null;
 }

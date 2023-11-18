@@ -20,6 +20,9 @@ class _HomeAppState extends State<HomeApp> {
   String password = '';
   TextEditingController titleController = TextEditingController();
   TextEditingController contentController = TextEditingController();
+
+  TextEditingController titleUpdateController = TextEditingController();
+  TextEditingController contentUpdateController = TextEditingController();
   late NoteBloc noteBloc;
 
   void _getData() async {
@@ -33,10 +36,10 @@ class _HomeAppState extends State<HomeApp> {
 
   @override
   void initState() {
+    super.initState();
     noteBloc = context.read<NoteBloc>();
     _getData();
     noteBloc.add(GetDataNote());
-    super.initState();
   }
 
   @override
@@ -75,7 +78,7 @@ class _HomeAppState extends State<HomeApp> {
         drawer: const DrawerApp(),
         appBar: AppBar(
           title: const Text('Danh sách ghi chú'),
-          backgroundColor: Color(0xFF83A2FF),
+          backgroundColor: const Color(0xFF83A2FF),
         ),
         body: BlocBuilder<NoteBloc, NoteState>(
           builder: (context, state) {
@@ -83,19 +86,20 @@ class _HomeAppState extends State<HomeApp> {
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               decoration: const BoxDecoration(
-                  gradient: LinearGradient(colors: [
-                Color(
-                  0xFFFFC5C5,
-                ),
-                Color(0xFF89B9AD)
-              ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
+                  // gradient: LinearGradient(colors: [
+                  //   Color(
+                  //     0xFFFFC5C5,
+                  //   ),
+                  //   Color(0xFF89B9AD)
+                  // ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                  ),
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   children: [
                     Expanded(
                       child: ListView.separated(
-                          padding: EdgeInsets.only(bottom: 65),
+                          padding: const EdgeInsets.only(bottom: 65),
                           itemBuilder: (context, index) {
                             return ItemNote(
                               titleNote: state.notes[index].title,
@@ -103,6 +107,30 @@ class _HomeAppState extends State<HomeApp> {
                               timeNote: state.notes[index].time,
                               onTapDelete: () {
                                 noteBloc.add(RemoveNote(removeIndex: index));
+                              },
+                              onTapChanged: () {
+                                titleUpdateController.text =
+                                    state.notes[index].title;
+                                contentUpdateController.text =
+                                    state.notes[index].content;
+                                AlertDialogNote(
+                                  context: context,
+                                  title: 'Thay đổi ghi chú',
+                                  onPressed: () {
+                                    noteBloc.add(
+                                      UpdateNote(
+                                          indexUpdated: index,
+                                          titleChanged:
+                                              titleUpdateController.text,
+                                          contentChanged:
+                                              contentUpdateController.text),
+                                    );
+                                    Navigator.pop(context);
+                                  },
+                                  content: '',
+                                  titleController: titleUpdateController,
+                                  contentController: contentUpdateController,
+                                );
                               },
                             );
                           },

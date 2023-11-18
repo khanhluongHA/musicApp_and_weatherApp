@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+final formKeyDialogNote = GlobalKey<FormState>();
 // ignore: non_constant_identifier_names
 Future<void> AlertDialogNote({
   required BuildContext context,
@@ -22,15 +23,35 @@ Future<void> AlertDialogNote({
         content: SizedBox(
           height: MediaQuery.of(context).size.height * 0.27,
           width: MediaQuery.of(context).size.width * 0.95,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              SizedBox(
-                height: 40,
-                child: TextField(
-                  controller: titleController,
+          child: Form(
+            key: formKeyDialogNote,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(
+                  height: 40,
+                  child: TextFormField(
+                    controller: titleController,
+                    decoration: const InputDecoration(
+                      labelText: 'Tiêu đề',
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Colors.grey,
+                            width: 1,
+                            style: BorderStyle.solid),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  controller: contentController,
+                  validator: _checkValidator,
+                  maxLines: 4,
                   decoration: const InputDecoration(
-                    labelText: 'Tiêu đề',
+                    labelText: 'Nội dung',
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                           color: Colors.grey,
@@ -39,22 +60,8 @@ Future<void> AlertDialogNote({
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextField(
-                controller: contentController,
-                maxLines: 4,
-                decoration: const InputDecoration(
-                  labelText: 'Nội dung',
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Colors.grey, width: 1, style: BorderStyle.solid),
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         actions: [
@@ -76,7 +83,9 @@ Future<void> AlertDialogNote({
                   style: TextStyle(color: Color(0xFF83A2FF)),
                 ),
                 onPressed: () {
-                  onPressed.call();
+                  if (formKeyDialogNote.currentState!.validate()) {
+                    onPressed.call();
+                  }
                 },
               ),
             ],
@@ -85,4 +94,18 @@ Future<void> AlertDialogNote({
       );
     },
   );
+}
+
+String? _checkValidator(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'Hãy nhập nội dung ghi chú !';
+  }
+  return null;
+}
+
+String? _checkValidatorTitle(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'Vui lòng nhập tiêu đề !';
+  }
+  return null;
 }

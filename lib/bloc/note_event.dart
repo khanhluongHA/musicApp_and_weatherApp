@@ -28,4 +28,15 @@ class RemoveNote extends NoteEvent {
   });
 }
 
-class GetDataNote extends NoteEvent{}
+class GetDataNote extends NoteEvent {}
+
+class UpdateNote extends NoteEvent {
+  const UpdateNote({
+    required this.titleChanged,
+    required this.contentChanged,
+    required this.indexUpdated,
+  });
+  final String titleChanged;
+  final String contentChanged;
+  final int indexUpdated;
+}
