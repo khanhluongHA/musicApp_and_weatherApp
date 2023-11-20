@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 class ItemNote extends StatelessWidget {
@@ -48,9 +46,9 @@ class ItemNote extends StatelessWidget {
           Text(
             overflow: TextOverflow.ellipsis,
             titleNote,
-            style: TextStyle(fontSize: 13),
+            style: const TextStyle(fontSize: 13),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           const Text(
@@ -65,7 +63,7 @@ class ItemNote extends StatelessWidget {
             child: Text(
               overflow: TextOverflow.ellipsis,
               contentNote,
-              style: TextStyle(fontSize: 13),
+              style: const TextStyle(fontSize: 13),
             ),
           ),
           const SizedBox(

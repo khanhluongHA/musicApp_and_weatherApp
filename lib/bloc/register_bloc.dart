@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:test_bloc/bloc/login_bloc.dart';
-import 'package:test_bloc/bloc/note_bloc.dart';
 import 'package:test_bloc/config/print_color.dart';
 import 'package:test_bloc/models/user_model.dart';
 

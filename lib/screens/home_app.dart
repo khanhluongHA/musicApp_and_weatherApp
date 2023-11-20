@@ -85,62 +85,64 @@ class _HomeAppState extends State<HomeApp> {
             return Container(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
-              decoration: const BoxDecoration(
-                  // gradient: LinearGradient(colors: [
-                  //   Color(
-                  //     0xFFFFC5C5,
-                  //   ),
-                  //   Color(0xFF89B9AD)
-                  // ], begin: Alignment.topLeft, end: Alignment.bottomRight),
-                  ),
+              decoration: const BoxDecoration(),
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      child: ListView.separated(
-                          padding: const EdgeInsets.only(bottom: 65),
-                          itemBuilder: (context, index) {
-                            return ItemNote(
-                              titleNote: state.notes[index].title,
-                              contentNote: state.notes[index].content,
-                              timeNote: state.notes[index].time,
-                              onTapDelete: () {
-                                noteBloc.add(RemoveNote(removeIndex: index));
-                              },
-                              onTapChanged: () {
-                                titleUpdateController.text =
-                                    state.notes[index].title;
-                                contentUpdateController.text =
-                                    state.notes[index].content;
-                                AlertDialogNote(
-                                  context: context,
-                                  title: 'Thay đổi ghi chú',
-                                  onPressed: () {
-                                    noteBloc.add(
-                                      UpdateNote(
-                                          indexUpdated: index,
-                                          titleChanged:
-                                              titleUpdateController.text,
-                                          contentChanged:
-                                              contentUpdateController.text),
-                                    );
-                                    Navigator.pop(context);
-                                  },
-                                  content: '',
-                                  titleController: titleUpdateController,
-                                  contentController: contentUpdateController,
-                                );
-                              },
-                            );
-                          },
-                          separatorBuilder: (context, index) {
-                            return const SizedBox(
-                              height: 10,
-                            );
-                          },
-                          itemCount: state.notes.length),
-                    ),
+                    state.notes.isEmpty
+                        ? const Text(
+                            'Ghi chú trống !',
+                            style: TextStyle(fontSize: 25, color: Colors.grey),
+                          )
+                        : Expanded(
+                            child: ListView.separated(
+                                padding: const EdgeInsets.only(bottom: 65),
+                                itemBuilder: (context, index) {
+                                  return ItemNote(
+                                    titleNote: state.notes[index].title,
+                                    contentNote: state.notes[index].content,
+                                    timeNote: state.notes[index].time,
+                                    onTapDelete: () {
+                                      noteBloc
+                                          .add(RemoveNote(removeIndex: index));
+                                    },
+                                    onTapChanged: () {
+                                      titleUpdateController.text =
+                                          state.notes[index].title;
+                                      contentUpdateController.text =
+                                          state.notes[index].content;
+                                      AlertDialogNote(
+                                        context: context,
+                                        title: 'Thay đổi ghi chú',
+                                        onPressed: () {
+                                          noteBloc.add(
+                                            UpdateNote(
+                                                indexUpdated: index,
+                                                titleChanged:
+                                                    titleUpdateController.text,
+                                                contentChanged:
+                                                    contentUpdateController
+                                                        .text),
+                                          );
+                                          Navigator.pop(context);
+                                        },
+                                        content: '',
+                                        titleController: titleUpdateController,
+                                        contentController:
+                                            contentUpdateController,
+                                      );
+                                    },
+                                  );
+                                },
+                                separatorBuilder: (context, index) {
+                                  return const SizedBox(
+                                    height: 10,
+                                  );
+                                },
+                                itemCount: state.notes.length),
+                          ),
                   ],
                 ),
               ),

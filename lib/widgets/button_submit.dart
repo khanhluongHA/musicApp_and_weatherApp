@@ -9,7 +9,7 @@ class ButtonSubmit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF83A2FF)),
+      style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF83A2FF)),
       onPressed: () {
         onPressed.call();
       },
