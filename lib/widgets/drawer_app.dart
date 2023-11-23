@@ -41,7 +41,7 @@ class DrawerApp extends StatelessWidget {
         Container(
           padding: const EdgeInsets.only(left: 20),
           height: MediaQuery.of(context).size.height * 0.3,
-          color: Color(0xFF83A2FF),
+          color: const Color(0xFF83A2FF),
           alignment: Alignment.centerLeft,
           child: Row(
             children: [

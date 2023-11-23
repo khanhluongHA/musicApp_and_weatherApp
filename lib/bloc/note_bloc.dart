@@ -79,17 +79,16 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
   }
 
   Future<void> getDataNote(GetDataNote event, Emitter<NoteState> emit) async {
+    listNote.clear();
+    emit(state.copyWith(notes: listNote));
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    List<String> titles =
-        sharedPreferences.getStringList(SaveData.saveTitle) ?? [];
-    List<String> contents =
-        sharedPreferences.getStringList(SaveData.saveContent) ?? [];
-    List<String> times =
-        sharedPreferences.getStringList(SaveData.saveTime) ?? [];
-    for (int i = 0; i < times.length; i++) {
+    listTitle = sharedPreferences.getStringList(SaveData.saveTitle) ?? [];
+    listContent = sharedPreferences.getStringList(SaveData.saveContent) ?? [];
+    listTime = sharedPreferences.getStringList(SaveData.saveTime) ?? [];
+    for (int i = 0; i < listTitle.length; i++) {
       listNote.add(ItemNoteModel(
-          title: titles[i], content: contents[i], time: times[i]));
+          title: listTitle[i], content: listContent[i], time: listTime[i]));
     }
 
     emit(state.copyWith(notes: listNote));
@@ -111,7 +110,6 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
     }
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-
     sharedPreferences.setStringList(SaveData.saveTitle, listTitle);
     sharedPreferences.setStringList(SaveData.saveContent, listContent);
     sharedPreferences.setStringList(SaveData.saveTime, listTime);

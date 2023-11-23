@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:test_bloc/bloc/note_bloc.dart';
 import 'package:test_bloc/config/print_color.dart';
 import 'package:test_bloc/config/save_data.dart';
 import 'package:test_bloc/models/user_model.dart';
@@ -39,15 +40,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Future<void> logout(LoginEvent event, Emitter<LoginState> emit) async {
     emit(state.copyWith(isLogin: false));
+    listTitle.clear();
+    listContent.clear();
+    listTime.clear();
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     sharedPreferences.remove(SaveData.saveIsLogIn);
     sharedPreferences.remove(SaveData.saveUserName);
     sharedPreferences.remove(SaveData.savePassword);
 
-    sharedPreferences.setStringList(SaveData.saveTitle, []);
-    sharedPreferences.setStringList(SaveData.saveContent, []);
-    sharedPreferences.setStringList(SaveData.saveTime, []);
-    printCyan('text');
+    sharedPreferences.setStringList(SaveData.saveTitle, listTitle);
+    sharedPreferences.setStringList(SaveData.saveContent, listContent);
+    sharedPreferences.setStringList(SaveData.saveTime, listTime);
+
   }
 }
