@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_bloc/bloc/login_bloc.dart';
+import 'package:test_bloc/cubit/login_cubit.dart';
 import 'package:test_bloc/screens/home_app.dart';
 import 'package:test_bloc/screens/register_screen.dart';
 import 'package:test_bloc/widgets/button_submit.dart';
@@ -19,6 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
   @override
   void dispose() {
     super.dispose();
@@ -28,11 +30,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final LoginBloc blocRead = context.read<LoginBloc>();
+    // final LoginBloc blocRead = context.read<LoginBloc>();
+    final LoginCubit loginCubit = context.read<LoginCubit>();
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
-            child: BlocListener<LoginBloc, LoginState>(
+            child: BlocListener<LoginCubit, LoginCubitState>(
                 listener: (context, state) {
                   if (state.isLogin) {
                     Navigator.pushReplacement(
@@ -60,7 +63,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const Text(
                         'Đăng nhập',
-                        style: TextStyle(color: Color(0xFF83A2FF), fontSize: 50),
+                        style:
+                            TextStyle(color: Color(0xFF83A2FF), fontSize: 50),
                       ),
                       const SizedBox(
                         height: 50,
@@ -86,10 +90,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             textButton: 'Đăng nhập',
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
-                                blocRead.add(
-                                  AuthLogin(userNameController.text,
-                                      passwordController.text),
-                                );
+                                loginCubit.authLogin(
+                                    userController: userNameController.text,
+                                    passwordController:
+                                        passwordController.text);
                                 userNameController.text = '';
                                 passwordController.text = '';
                               }

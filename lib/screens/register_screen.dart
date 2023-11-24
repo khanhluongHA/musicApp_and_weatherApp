@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_bloc/bloc/register_bloc.dart';
+import 'package:test_bloc/cubit/register_cubit.dart';
 import 'package:test_bloc/screens/login_screen.dart';
 import 'package:test_bloc/widgets/button_submit.dart';
 import 'package:test_bloc/widgets/custom_textfield_login.dart';
@@ -21,7 +22,8 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final RegisterBloc blocRead = context.read<RegisterBloc>();
+    // final RegisterBloc blocRead = context.read<RegisterBloc>();
+    final RegisterCubit registerCubit = context.read<RegisterCubit>();
 
     return Scaffold(
       appBar: AppBar(
@@ -29,7 +31,7 @@ class RegisterScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Center(
-          child: BlocListener<RegisterBloc, RegisterState>(
+          child: BlocListener<RegisterCubit, RegisterCubitState>(
             listener: (context, state) {
               state.isRegister
                   ? ShowAlertDialog(
@@ -95,17 +97,13 @@ class RegisterScreen extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.7,
                     height: 40,
                     child: ButtonSubmit(
-                      textButton: "Đăn ký",
+                      textButton: "Đăng ký",
                       onPressed: () {
                         if (formKeyRegister.currentState!.validate()) {
-                          blocRead.add(
-                            RegisterCheck(
-                              newUsername: userNameController.text,
-                              newPassword: passwordController.text,
-                              newConfirmPassword:
-                                  confirmPasswordController.text,
-                            ),
-                          );
+                          registerCubit.registerCheck(
+                              userName: userNameController.text,
+                              password: passwordController.text,
+                              confirmPassword: confirmPasswordController.text);
                           userNameController.text = '';
                           passwordController.text = '';
                           confirmPasswordController.text = '';
