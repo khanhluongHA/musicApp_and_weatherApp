@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_bloc/bloc/login_bloc.dart';
+import 'package:test_bloc/cubit/login_cubit.dart';
 import 'package:test_bloc/models/item_drawer_model.dart';
 import 'package:test_bloc/screens/login_screen.dart';
 import 'package:test_bloc/widgets/item_drawer.dart';
@@ -12,7 +13,7 @@ class DrawerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final LoginBloc blocRead = context.read<LoginBloc>();
+    final loginCubit = context.read<LoginCubit>();
 
     final List<ItemDrawerModel> itemDrawers = [
       ItemDrawerModel(icon: Icons.group, onPressed: () {}, title: 'New Group'),
@@ -25,7 +26,8 @@ class DrawerApp extends StatelessWidget {
       ItemDrawerModel(
           icon: Icons.logout,
           onPressed: () {
-            blocRead.add(Logout());
+            loginCubit.logout();
+
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -62,7 +64,7 @@ class DrawerApp extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Thanh Xuân',
+                    'Tên ...',
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                   Text(

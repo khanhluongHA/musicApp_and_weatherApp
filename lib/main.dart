@@ -4,6 +4,7 @@ import 'package:test_bloc/bloc/login_bloc.dart';
 import 'package:test_bloc/bloc/note_bloc.dart';
 import 'package:test_bloc/bloc/register_bloc.dart';
 import 'package:test_bloc/cubit/login_cubit.dart';
+import 'package:test_bloc/cubit/note_cubit.dart';
 import 'package:test_bloc/cubit/register_cubit.dart';
 import 'package:test_bloc/screens/splash_screen.dart';
 
@@ -25,19 +26,13 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => LoginBloc(),
-        ),
-        BlocProvider(
-          create: (context) => RegisterBloc(),
-        ),
-        BlocProvider(
-          create: (context) => NoteBloc(),
-        ),
-        BlocProvider(
           create: (context) => LoginCubit(),
         ),
         BlocProvider(
           create: (context) => RegisterCubit(),
+        ),
+        BlocProvider(
+          create: (context) => NoteCubit(),
         ),
       ],
       child: const MaterialApp(

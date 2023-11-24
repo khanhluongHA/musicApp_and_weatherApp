@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:test_bloc/bloc/note_bloc.dart';
 import 'package:test_bloc/config/save_data.dart';
 import 'package:test_bloc/models/user_model.dart';
 
@@ -33,5 +34,23 @@ class LoginCubit extends Cubit<LoginCubitState> {
           user: UserModel(
               userName: userController.trim(), password: passwordController)));
     }
+  }
+
+  
+  Future<void> logout() async {
+    emit(state.copyWith(isLogin: false));
+    listTitle.clear();
+    listContent.clear();
+    listTime.clear();
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    sharedPreferences.remove(SaveData.saveIsLogIn);
+    sharedPreferences.remove(SaveData.saveUserName);
+    sharedPreferences.remove(SaveData.savePassword);
+
+    sharedPreferences.setStringList(SaveData.saveTitle, listTitle);
+    sharedPreferences.setStringList(SaveData.saveContent, listContent);
+    sharedPreferences.setStringList(SaveData.saveTime, listTime);
+
   }
 }

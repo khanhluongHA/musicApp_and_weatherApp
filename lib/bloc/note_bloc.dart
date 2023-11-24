@@ -13,12 +13,7 @@ List<String> listTitle = [];
 List<String> listContent = [];
 List<String> listTime = [];
 
-getTime() {
-  var time = DateTime.now();
-  var dataTime = time.toString().split(' ');
-  printCyan(dataTime[0]);
-  return dataTime[0];
-}
+
 
 class NoteBloc extends Bloc<NoteEvent, NoteState> {
   NoteBloc() : super(const NoteState()) {
@@ -28,6 +23,13 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
     on<UpdateNote>(updateNote);
   }
 
+  _getTime() {
+  var time = DateTime.now();
+  var dataTime = time.toString().split(' ');
+  printCyan(dataTime[0]);
+  return dataTime[0];
+}
+
   Future<void> addNote(AddNote event, Emitter<NoteState> emit) async {
     emit(state.copyWith(status: StatusNoteState.start));
 
@@ -35,7 +37,7 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
       ItemNoteModel(
         title: event.newTitle,
         content: event.newContent,
-        time: getTime(),
+        time: _getTime(),
       ),
     );
 

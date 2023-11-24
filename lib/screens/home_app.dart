@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_bloc/bloc/note_bloc.dart';
 import 'package:test_bloc/config/print_color.dart';
 import 'package:test_bloc/config/save_data.dart';
+import 'package:test_bloc/cubit/note_cubit.dart';
 import 'package:test_bloc/widgets/alert_dialog_note.dart';
 import 'package:test_bloc/widgets/drawer_app.dart';
 import 'package:test_bloc/widgets/item_note.dart';
@@ -23,7 +24,8 @@ class _HomeAppState extends State<HomeApp> {
 
   TextEditingController titleUpdateController = TextEditingController();
   TextEditingController contentUpdateController = TextEditingController();
-  late NoteBloc noteBloc;
+
+  late NoteCubit noteCubit;
 
   void _getData() async {
     final SharedPreferences sharedPreferences =
@@ -37,14 +39,15 @@ class _HomeAppState extends State<HomeApp> {
   @override
   void initState() {
     super.initState();
-    noteBloc = context.read<NoteBloc>();
+
+    noteCubit = context.read<NoteCubit>();
     _getData();
-    noteBloc.add(GetDataNote());
+
+    noteCubit.getDataNote();
   }
 
   @override
   Widget build(BuildContext context) {
-    final NoteBloc noteBloc = context.read<NoteBloc>();
     return WillPopScope(
       onWillPop: () async {
         return false;
@@ -63,10 +66,9 @@ class _HomeAppState extends State<HomeApp> {
               content: '',
               title: 'Thêm ghi chú',
               onPressed: () {
-                noteBloc.add(AddNote(
-                  newTitle: titleController.text,
-                  newContent: contentController.text,
-                ));
+                noteCubit.addNote(
+                    title: titleController.text,
+                    content: contentController.text);
                 titleController.text = '';
                 contentController.text = '';
                 Navigator.pop(context);
@@ -80,7 +82,7 @@ class _HomeAppState extends State<HomeApp> {
           title: const Text('Danh sách ghi chú'),
           backgroundColor: const Color(0xFF83A2FF),
         ),
-        body: BlocBuilder<NoteBloc, NoteState>(
+        body: BlocBuilder<NoteCubit, NoteCubitState>(
           builder: (context, state) {
             return Container(
               height: MediaQuery.of(context).size.height,
@@ -105,8 +107,7 @@ class _HomeAppState extends State<HomeApp> {
                                     contentNote: state.notes[index].content,
                                     timeNote: state.notes[index].time,
                                     onTapDelete: () {
-                                      noteBloc
-                                          .add(RemoveNote(removeIndex: index));
+                                      noteCubit.removeNote(indexRemove: index);
                                     },
                                     onTapChanged: () {
                                       titleUpdateController.text =
@@ -117,15 +118,13 @@ class _HomeAppState extends State<HomeApp> {
                                         context: context,
                                         title: 'Thay đổi ghi chú',
                                         onPressed: () {
-                                          noteBloc.add(
-                                            UpdateNote(
-                                                indexUpdated: index,
-                                                titleChanged:
-                                                    titleUpdateController.text,
-                                                contentChanged:
-                                                    contentUpdateController
-                                                        .text),
-                                          );
+                                          noteCubit.updateNote(
+                                              indexUpdated: index,
+                                              titleChanged:
+                                                  titleUpdateController.text,
+                                              contentChanged:
+                                                  contentUpdateController.text);
+
                                           Navigator.pop(context);
                                         },
                                         content: '',
