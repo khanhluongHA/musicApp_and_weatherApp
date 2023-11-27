@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_bloc/bloc/register_bloc.dart';
 import 'package:test_bloc/cubit/register_cubit.dart';
 import 'package:test_bloc/screens/login_screen.dart';
 import 'package:test_bloc/widgets/button_submit.dart';

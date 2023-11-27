@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:test_bloc/bloc/note_bloc.dart';
 import 'package:test_bloc/config/print_color.dart';
 import 'package:test_bloc/config/save_data.dart';
 import 'package:test_bloc/cubit/note_cubit.dart';
