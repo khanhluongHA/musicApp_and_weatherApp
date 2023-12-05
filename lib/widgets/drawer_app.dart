@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_bloc/cubit/login_cubit.dart';
 import 'package:test_bloc/models/item_drawer_model.dart';
-import 'package:test_bloc/screens/login_screen.dart';
+import 'package:test_bloc/screens/note_page/login_screen.dart';
+import 'package:test_bloc/screens/weather_page/wather_page.dart';
 import 'package:test_bloc/widgets/item_drawer.dart';
 
 class DrawerApp extends StatelessWidget {
@@ -15,7 +16,17 @@ class DrawerApp extends StatelessWidget {
     final loginCubit = context.read<LoginCubit>();
 
     final List<ItemDrawerModel> itemDrawers = [
-      ItemDrawerModel(icon: Icons.group, onPressed: () {}, title: 'New Group'),
+      ItemDrawerModel(
+          icon: Icons.group,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const WeatherPage(),
+              ),
+            );
+          },
+          title: 'Weather app'),
       ItemDrawerModel(
           icon: Icons.wifi_channel, onPressed: () {}, title: 'New Channel'),
       ItemDrawerModel(

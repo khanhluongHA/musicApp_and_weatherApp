@@ -10,11 +10,12 @@ class WaterState extends Equatable {
   const WaterState(
       {this.waterMap = const {},
       this.ids = const [],
-      this.status = WaterStatus.init});
+      this.status = WaterStatus.init, this.a =0});
   final Map<String, dynamic>? waterMap;
   final List<String> ids;
   final Enum status;
+  final int a;
 
   @override
-  List<Object?> get props => [waterMap, ids, status];
+  List<Object?> get props => [waterMap, ids, status,a];
 }

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_bloc/config/save_data.dart';
-import 'package:test_bloc/screens/home_app.dart';
-import 'package:test_bloc/screens/login_screen.dart';
+import 'package:test_bloc/screens/note_page/home_app.dart';
+import 'package:test_bloc/screens/note_page/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

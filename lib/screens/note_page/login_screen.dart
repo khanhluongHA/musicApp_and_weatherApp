@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_bloc/cubit/login_cubit.dart';
-import 'package:test_bloc/screens/home_app.dart';
-import 'package:test_bloc/screens/register_screen.dart';
+import 'package:test_bloc/screens/note_page/home_app.dart';
+import 'package:test_bloc/screens/note_page/register_screen.dart';
 import 'package:test_bloc/widgets/button_submit.dart';
 import 'package:test_bloc/widgets/custom_textfield_login.dart';
 import 'package:test_bloc/widgets/input_password.dart';

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_bloc/bloc/weather_bloc.dart';
 import 'package:test_bloc/cubit/login_cubit.dart';
 import 'package:test_bloc/cubit/note_cubit.dart';
 import 'package:test_bloc/cubit/register_cubit.dart';
 import 'package:test_bloc/cubit/water_cubit.dart';
-import 'package:test_bloc/screens/water_screen.dart';
+import 'package:test_bloc/screens/note_page/splash_screen.dart';
+import 'package:test_bloc/screens/note_page/water_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,9 +37,12 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(
           create: (context) => WaterCubit(),
         ),
+        BlocProvider(
+          create: (context) => WeatherBloc(),
+        ),
       ],
       child: const MaterialApp(
-        home: WaterScreen(),
+        home: SplashScreen(),
       ),
     );
   }
