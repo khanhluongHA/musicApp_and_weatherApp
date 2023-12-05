@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_bloc/cubit/login_cubit.dart';
 import 'package:test_bloc/models/item_drawer_model.dart';
 import 'package:test_bloc/screens/note_page/login_screen.dart';
+import 'package:test_bloc/screens/timer_page/input_time.dart';
 import 'package:test_bloc/screens/weather_page/wather_page.dart';
 import 'package:test_bloc/widgets/item_drawer.dart';
 
@@ -17,7 +18,7 @@ class DrawerApp extends StatelessWidget {
 
     final List<ItemDrawerModel> itemDrawers = [
       ItemDrawerModel(
-          icon: Icons.group,
+          icon: Icons.thunderstorm,
           onPressed: () {
             Navigator.push(
               context,
@@ -28,9 +29,18 @@ class DrawerApp extends StatelessWidget {
           },
           title: 'Weather app'),
       ItemDrawerModel(
-          icon: Icons.wifi_channel, onPressed: () {}, title: 'New Channel'),
+          icon: Icons.timer,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => InputTime(),
+              ),
+            );
+          },
+          title: 'Timer app'),
       ItemDrawerModel(
-          icon: Icons.contact_emergency, onPressed: () {}, title: 'Contacts'),
+          icon: Icons.headphones, onPressed: () {}, title: 'Music app'),
       ItemDrawerModel(icon: Icons.call, onPressed: () {}, title: 'Contacts'),
       ItemDrawerModel(icon: Icons.settings, onPressed: () {}, title: 'Setting'),
       ItemDrawerModel(

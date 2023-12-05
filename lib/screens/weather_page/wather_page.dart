@@ -6,7 +6,6 @@ import 'package:test_bloc/config/app_color.dart';
 import 'package:test_bloc/config/app_size.dart';
 import 'package:test_bloc/config/print_color.dart';
 
-
 class WeatherPage extends StatefulWidget {
   const WeatherPage({super.key});
 
@@ -36,12 +35,21 @@ class _WeatherPageState extends State<WeatherPage> {
             if (weatherBloc.state.dataWeather.isEmpty) {
               return const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [Center(child: Text('dữ liệu trống'))],
+                children: [Center(child: CircularProgressIndicator())],
               );
             } else {
               return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const SizedBox(
+                          width: 40,
+                          height: 40,
+                          child: Icon(Icons.arrow_back))),
+                  const SizedBox(
                     height: AppSize.size30,
                   ),
                   Row(
