@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_bloc/cubit/login_cubit.dart';
 import 'package:test_bloc/models/item_drawer_model.dart';
+import 'package:test_bloc/screens/audio_player_page/audio_player_page.dart';
 import 'package:test_bloc/screens/note_page/login_screen.dart';
 import 'package:test_bloc/screens/timer_page/input_time.dart';
 import 'package:test_bloc/screens/weather_page/wather_page.dart';
@@ -40,7 +41,16 @@ class DrawerApp extends StatelessWidget {
           },
           title: 'Timer app'),
       ItemDrawerModel(
-          icon: Icons.headphones, onPressed: () {}, title: 'Music app'),
+          icon: Icons.headphones,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AudioPlayerPage(),
+              ),
+            );
+          },
+          title: 'Music app'),
       ItemDrawerModel(icon: Icons.call, onPressed: () {}, title: 'Contacts'),
       ItemDrawerModel(icon: Icons.settings, onPressed: () {}, title: 'Setting'),
       ItemDrawerModel(

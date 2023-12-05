@@ -45,6 +45,8 @@ dependencies:
   copy_with_extension_gen: ^4.0.0
   copy_with_extension: ^4.0.0
   http: ^1.1.0
+  audio_video_progress_bar: ^2.0.1
+  audioplayers: ^5.2.1
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +73,7 @@ flutter:
   assets:
     - assets/images/
     - assets/animations/
+    - assets/audio/
 
   #   - images/a_dot_ham.jpeg
 

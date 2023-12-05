@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_bloc/bloc/weather_bloc.dart';
 import 'package:test_bloc/cubit/login_cubit.dart';
+import 'package:test_bloc/cubit/music_cubit.dart';
 import 'package:test_bloc/cubit/note_cubit.dart';
 import 'package:test_bloc/cubit/register_cubit.dart';
 import 'package:test_bloc/cubit/timer_cubit.dart';
@@ -43,6 +44,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => TimerCubit(),
+        ),
+        BlocProvider(
+          create: (context) => MusicCubit(),
         ),
       ],
       child: const MaterialApp(
