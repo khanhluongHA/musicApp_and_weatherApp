@@ -10,23 +10,22 @@ bool isFirst = true;
 
 class TimerCubit extends Cubit<TimerState> {
   TimerCubit() : super(TimerState());
-
+  int newHour = 0;
+  int newMinute = 0;
+  int newSecond = 0;
   void setTime(
     int newHour,
     int newMinute,
   ) {
-    emit(state.copyWith(
-      hour: newHour,
-      minute: newMinute,
-    ));
+    newMinute--;
+    emit(state.copyWith(hour: newHour, minute: newMinute, second: 60));
+    newHour = state.hour * 3600;
+    newMinute = state.minute * 60 + 60;
+    newSecond = newHour + newMinute;
   }
 
   void startTimer() {
     emit(state.copyWith(isActive: true, status: TimerStatus.success));
-
-    int newHour = state.hour * 3600;
-    int newMinute = state.minute * 60;
-    int newSecond = newHour + newMinute;
 
     timer = Timer.periodic(const Duration(seconds: 1), (_) {
       emit(state.copyWith(status: TimerStatus.initial));
@@ -41,7 +40,7 @@ class TimerCubit extends Cubit<TimerState> {
 
           emit(state.copyWith(
               hour: newSecond ~/ 3600,
-              minute: (newSecond ~/ 60) % 60 - 1,
+              minute: (newSecond ~/ 60) % 60,
               second: newSecond % 60,
               status: TimerStatus.success));
         } else {
@@ -74,8 +73,14 @@ class TimerCubit extends Cubit<TimerState> {
   }
 
   void resetTimer() {
-    emit(state.copyWith(status: TimerStatus.initial));
+    emit(state.copyWith(
+      status: TimerStatus.initial,
+      isActive: false,
+    ));
+    isFirst = true;
+    timer?.cancel();
 
-    emit(state.copyWith(hour: 0, minute: 0, status: TimerStatus.success));
+    emit(state.copyWith(
+        hour: 0, minute: 0, isRunning: false, status: TimerStatus.success));
   }
 }

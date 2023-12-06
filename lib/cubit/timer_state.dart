@@ -1,10 +1,10 @@
 part of 'timer_cubit.dart';
 
-enum TimerStatus { initial, success, error }
+enum TimerStatus { initial, success,end, error }
 
 class TimerState extends Equatable {
   TimerState(
-      {this.second = 0,
+      {this.second = 60,
       this.hour = 0,
       this.minute = 0,
       this.status = TimerStatus.initial,
