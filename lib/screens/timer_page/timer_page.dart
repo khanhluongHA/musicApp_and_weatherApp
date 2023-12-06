@@ -10,6 +10,7 @@ class TimerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final TimerCubit cubit = context.read<TimerCubit>();
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: Center(
           child: BlocBuilder<TimerCubit, TimerState>(
@@ -17,18 +18,6 @@ class TimerPage extends StatelessWidget {
               return Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Row(
-                      children: [
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: const SizedBox(
-                                width: 40,
-                                height: 40,
-                                child: Icon(Icons.arrow_back))),
-                      ],
-                    ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.3,
                     ),

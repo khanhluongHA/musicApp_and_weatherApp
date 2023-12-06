@@ -26,92 +26,76 @@ class _InputTimeState extends State<InputTime> {
   Widget build(BuildContext context) {
     final TimerCubit timerCubit = context.read<TimerCubit>();
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: const SizedBox(
-                          width: 40,
-                          height: 40,
-                          child: Icon(Icons.arrow_back))),
-                ],
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    child: Column(
-                      children: [
-                        const Text(
-                          'Giờ',
-                          style: TextStyle(
-                            fontSize: 25,
-                          ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                          child: TextField(
-                            controller: hourController,
-                            keyboardType: TextInputType.number,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  Container(
-                    child: Column(
-                      children: [
-                        const Text(
-                          'Phút',
-                          style: TextStyle(
-                            fontSize: 25,
-                          ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                          child: TextField(
-                            controller: minuteController,
-                            keyboardType: TextInputType.number,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    timerCubit.setTime(
-                      int.parse(hourController.text),
-                      int.parse(minuteController.text),
-                    );
-                    hourController.text = '';
-                    minuteController.text = '';
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const TimerPage(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Giờ',
+                      style: TextStyle(
+                        fontSize: 25,
                       ),
-                    );
-                  },
-                  child: const Text('Bắt đầu'))
-            ],
-          ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.2,
+                      child: TextField(
+                        controller: hourController,
+                        keyboardType: TextInputType.number,
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                Container(
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Phút',
+                        style: TextStyle(
+                          fontSize: 25,
+                        ),
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.2,
+                        child: TextField(
+                          controller: minuteController,
+                          keyboardType: TextInputType.number,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  timerCubit.setTime(
+                    int.parse(hourController.text),
+                    int.parse(minuteController.text),
+                  );
+                  hourController.text = '';
+                  minuteController.text = '';
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const TimerPage(),
+                    ),
+                  );
+                },
+                child: const Text('Bắt đầu'))
+          ],
         ),
       ),
     );

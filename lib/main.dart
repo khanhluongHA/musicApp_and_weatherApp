@@ -9,7 +9,6 @@ import 'package:test_bloc/cubit/timer_cubit.dart';
 import 'package:test_bloc/cubit/water_cubit.dart';
 import 'package:test_bloc/screens/note_page/splash_screen.dart';
 import 'package:test_bloc/screens/note_page/water_screen.dart';
-import 'package:test_bloc/screens/timer_page/input_time.dart';
 import 'package:test_bloc/screens/weather_page/wather_page.dart';
 
 void main() {
@@ -51,9 +50,9 @@ class _MyAppState extends State<MyApp> {
           create: (context) => MusicCubit(),
         ),
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: InputTime(),
+        home: SplashScreen(),
       ),
     );
   }

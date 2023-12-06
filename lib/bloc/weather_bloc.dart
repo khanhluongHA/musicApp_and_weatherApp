@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:test_bloc/bloc/weather_state.dart';
 import 'package:test_bloc/config/print_color.dart';
 import 'package:test_bloc/models/location_model.dart';
@@ -45,16 +47,27 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       GetLocation event, Emitter<WeatherState> emit) async {
     emit(state.copyWith(status: WeatherStatus.start));
     final data = await FetchApi.getLocation(event.city);
-    final map = data[0];
-    final LocationModel item;
-    item = LocationModel.fromJson(map);
-    emit(state.copyWith(
-        lat: item.lat,
-        lon: item.lon,
-        city: event.city,
-        isSearch: true,
-        status: WeatherStatus.success));
-    printYellow(state.lat.toString());
-    printYellow(state.lon.toString());
+    if (data.isNotEmpty) {
+      final map = data[0];
+      final LocationModel item;
+      item = LocationModel.fromJson(map);
+      emit(state.copyWith(
+          lat: item.lat,
+          lon: item.lon,
+          city: event.city,
+          isSearch: true,
+          status: WeatherStatus.success));
+      printYellow(state.lat.toString());
+      printYellow(state.lon.toString());
+    } else {
+      Fluttertoast.showToast(
+          msg: "Thành phố không tồn tại!",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
   }
 }
