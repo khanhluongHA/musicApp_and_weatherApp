@@ -15,7 +15,9 @@ class SearchCity extends StatelessWidget {
   Widget build(BuildContext context) {
     final WeatherBloc weatherBloc = context.read<WeatherBloc>();
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Tìm kiếm'),
+      ),
       body: SafeArea(
           child: Center(
         child: Column(

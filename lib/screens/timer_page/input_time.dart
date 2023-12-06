@@ -26,7 +26,9 @@ class _InputTimeState extends State<InputTime> {
   Widget build(BuildContext context) {
     final TimerCubit timerCubit = context.read<TimerCubit>();
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Timer app'),
+      ),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

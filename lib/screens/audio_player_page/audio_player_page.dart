@@ -30,6 +30,7 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
         child: Container(
             height: height,
             width: width,
+            padding: EdgeInsets.only(top: 20),
             decoration: const BoxDecoration(
                 gradient: LinearGradient(
                     colors: [Color(0xFFFF9B50), Color(0xFF952323)],

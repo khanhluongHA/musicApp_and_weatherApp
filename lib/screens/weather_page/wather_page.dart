@@ -29,6 +29,21 @@ class _WeatherPageState extends State<WeatherPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Weather app'),
+              GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => SearchCity()));
+                  },
+                  child: const SizedBox(
+                      width: 40, height: 40, child: Icon(Icons.search))),
+            ],
+          ),
+        ),
         backgroundColor: const Color(0xFF8ACDD7),
         body: BlocBuilder<WeatherBloc, WeatherState>(
           bloc: weatherBloc,
@@ -40,39 +55,14 @@ class _WeatherPageState extends State<WeatherPage> {
               );
             } else {
               return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: const SizedBox(
-                              width: 40,
-                              height: 40,
-                              child: Icon(Icons.arrow_back))),
-                      GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SearchCity()));
-                          },
-                          child: const SizedBox(
-                              width: 40,
-                              height: 40,
-                              child: Icon(Icons.search))),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: AppSize.size30,
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(

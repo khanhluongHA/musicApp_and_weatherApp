@@ -23,7 +23,13 @@ class TitlePageView extends StatelessWidget {
                 Navigator.pop(context);
               },
               child: const SizedBox(
-                  width: 40, height: 40, child: Icon(Icons.arrow_back))),
+                  width: 60,
+                  height: 40,
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                    size: 30,
+                  ))),
           Column(children: [
             Text(
               title,

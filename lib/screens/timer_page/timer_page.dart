@@ -10,7 +10,9 @@ class TimerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final TimerCubit cubit = context.read<TimerCubit>();
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Timer'),
+      ),
       body: SafeArea(
         child: Center(
           child: BlocBuilder<TimerCubit, TimerState>(
