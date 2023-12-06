@@ -7,4 +7,6 @@ class SaveData {
   static const String saveTitle = 'SAVE_TITLE';
   static const String saveContent = 'SAVE_CONTENT';
   static const String saveTime = 'SAVE_TIME';
+  static const String saveStatus = 'SAVE_STATUS';
+
 }

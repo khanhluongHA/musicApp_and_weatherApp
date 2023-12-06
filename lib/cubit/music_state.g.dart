@@ -28,9 +28,9 @@ abstract class _$MusicStateCWProxy {
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfMusicState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfMusicState.copyWith.fieldName(...)`
 class _$MusicStateCWProxyImpl implements _$MusicStateCWProxy {
-  const _$MusicStateCWProxyImpl(this._value);
-
   final MusicState _value;
+
+  const _$MusicStateCWProxyImpl(this._value);
 
   @override
   MusicState currentMusic(int currentMusic) => this(currentMusic: currentMusic);

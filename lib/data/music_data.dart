@@ -1,4 +1,3 @@
-
 import 'package:test_bloc/models/music_model.dart';
 
 List<MusicModel> musics = [

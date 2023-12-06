@@ -7,7 +7,15 @@ part of 'weather_state.dart';
 // **************************************************************************
 
 abstract class _$WeatherStateCWProxy {
+  WeatherState city(String city);
+
   WeatherState dataWeather(List<MainWeather> dataWeather);
+
+  WeatherState isSearch(bool isSearch);
+
+  WeatherState lat(double lat);
+
+  WeatherState lon(double lon);
 
   WeatherState status(Enum status);
 
@@ -18,7 +26,11 @@ abstract class _$WeatherStateCWProxy {
   /// WeatherState(...).copyWith(id: 12, name: "My name")
   /// ````
   WeatherState call({
+    String? city,
     List<MainWeather>? dataWeather,
+    bool? isSearch,
+    double? lat,
+    double? lon,
     Enum? status,
   });
 }
@@ -30,8 +42,20 @@ class _$WeatherStateCWProxyImpl implements _$WeatherStateCWProxy {
   const _$WeatherStateCWProxyImpl(this._value);
 
   @override
+  WeatherState city(String city) => this(city: city);
+
+  @override
   WeatherState dataWeather(List<MainWeather> dataWeather) =>
       this(dataWeather: dataWeather);
+
+  @override
+  WeatherState isSearch(bool isSearch) => this(isSearch: isSearch);
+
+  @override
+  WeatherState lat(double lat) => this(lat: lat);
+
+  @override
+  WeatherState lon(double lon) => this(lon: lon);
 
   @override
   WeatherState status(Enum status) => this(status: status);
@@ -45,15 +69,35 @@ class _$WeatherStateCWProxyImpl implements _$WeatherStateCWProxy {
   /// WeatherState(...).copyWith(id: 12, name: "My name")
   /// ````
   WeatherState call({
+    Object? city = const $CopyWithPlaceholder(),
     Object? dataWeather = const $CopyWithPlaceholder(),
+    Object? isSearch = const $CopyWithPlaceholder(),
+    Object? lat = const $CopyWithPlaceholder(),
+    Object? lon = const $CopyWithPlaceholder(),
     Object? status = const $CopyWithPlaceholder(),
   }) {
     return WeatherState(
+      city: city == const $CopyWithPlaceholder() || city == null
+          ? _value.city
+          // ignore: cast_nullable_to_non_nullable
+          : city as String,
       dataWeather:
           dataWeather == const $CopyWithPlaceholder() || dataWeather == null
               ? _value.dataWeather
               // ignore: cast_nullable_to_non_nullable
               : dataWeather as List<MainWeather>,
+      isSearch: isSearch == const $CopyWithPlaceholder() || isSearch == null
+          ? _value.isSearch
+          // ignore: cast_nullable_to_non_nullable
+          : isSearch as bool,
+      lat: lat == const $CopyWithPlaceholder() || lat == null
+          ? _value.lat
+          // ignore: cast_nullable_to_non_nullable
+          : lat as double,
+      lon: lon == const $CopyWithPlaceholder() || lon == null
+          ? _value.lon
+          // ignore: cast_nullable_to_non_nullable
+          : lon as double,
       status: status == const $CopyWithPlaceholder() || status == null
           ? _value.status
           // ignore: cast_nullable_to_non_nullable

@@ -5,6 +5,8 @@ class AppApi {
 
   //path
   static const String data = '/data/2.5/forecast';
+  static const String getLocation = '/geo/1.0/direct';
+
 
   //action
   static const String action = 'action';
@@ -16,6 +18,9 @@ class AppApi {
   static const String lon = 'lon';
   static const String units = 'units';
   static const String metric = 'metric';
+  static const String q = 'q';
+  static const String limit = 'limit';
+
 
   //timezone params
   static const String timezoneVN = 'Asia/Ho_Chi_Minh';

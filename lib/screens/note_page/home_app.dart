@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_bloc/config/print_color.dart';
 import 'package:test_bloc/config/save_data.dart';
 import 'package:test_bloc/cubit/note_cubit.dart';
+import 'package:test_bloc/screens/note_page/ditail_note.dart';
 import 'package:test_bloc/widgets/alert_dialog_note.dart';
 import 'package:test_bloc/widgets/drawer_app.dart';
 import 'package:test_bloc/widgets/item_note.dart';
@@ -105,6 +106,24 @@ class _HomeAppState extends State<HomeApp> {
                                     titleNote: state.notes[index].title,
                                     contentNote: state.notes[index].content,
                                     timeNote: state.notes[index].time,
+                                    isStatus: state.notes[index].noteStatus,
+                                    callbackCheckBox: () {
+                                      noteCubit.setValueCheckBox(index);
+                                    },
+                                    onClick: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => DetailNote(
+                                                    date:
+                                                        state.notes[index].time,
+                                                    title: state
+                                                        .notes[index].title,
+                                                    content: state
+                                                        .notes[index].content,
+                                                    isStatus: state.notes[index].noteStatus,
+                                                  )));
+                                    },
                                     onTapDelete: () {
                                       noteCubit.removeNote(indexRemove: index);
                                     },

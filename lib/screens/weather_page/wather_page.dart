@@ -5,6 +5,7 @@ import 'package:test_bloc/bloc/weather_state.dart';
 import 'package:test_bloc/config/app_color.dart';
 import 'package:test_bloc/config/app_size.dart';
 import 'package:test_bloc/config/print_color.dart';
+import 'package:test_bloc/screens/weather_page/search_city.dart';
 
 class WeatherPage extends StatefulWidget {
   const WeatherPage({super.key});
@@ -41,14 +42,30 @@ class _WeatherPageState extends State<WeatherPage> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: const SizedBox(
-                          width: 40,
-                          height: 40,
-                          child: Icon(Icons.arrow_back))),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: const SizedBox(
+                              width: 40,
+                              height: 40,
+                              child: Icon(Icons.arrow_back))),
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SearchCity()));
+                          },
+                          child: const SizedBox(
+                              width: 40,
+                              height: 40,
+                              child: Icon(Icons.search))),
+                    ],
+                  ),
                   const SizedBox(
                     height: AppSize.size30,
                   ),
@@ -58,14 +75,14 @@ class _WeatherPageState extends State<WeatherPage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const Text(
-                            'Hà Nội',
+                          Text(
+                            '${weatherBloc.state.city}',
                             style: TextStyle(
                                 color: AppColors.white,
                                 fontSize: AppSize.size30),
                           ),
                           Text(
-                            '${weatherBloc.state.dataWeather[0].temp.ceil() + 1}',
+                            ' ${weatherBloc.state.dataWeather[0].temp.ceil()}°',
                             style: const TextStyle(
                                 color: AppColors.white,
                                 fontSize: AppSize.size90,

@@ -12,8 +12,7 @@ List<ItemNoteModel> listNote = [];
 List<String> listTitle = [];
 List<String> listContent = [];
 List<String> listTime = [];
-
-
+List<bool> listStatus = [];
 
 class NoteBloc extends Bloc<NoteEvent, NoteState> {
   NoteBloc() : super(const NoteState()) {
@@ -24,21 +23,21 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
   }
 
   _getTime() {
-  var time = DateTime.now();
-  var dataTime = time.toString().split(' ');
-  printCyan(dataTime[0]);
-  return dataTime[0];
-}
+    var time = DateTime.now();
+    var dataTime = time.toString().split(' ');
+    printCyan(dataTime[0]);
+    return dataTime[0];
+  }
 
   Future<void> addNote(AddNote event, Emitter<NoteState> emit) async {
     emit(state.copyWith(status: StatusNoteState.start));
 
     listNote.add(
       ItemNoteModel(
-        title: event.newTitle,
-        content: event.newContent,
-        time: _getTime(),
-      ),
+          title: event.newTitle,
+          content: event.newContent,
+          time: _getTime(),
+          noteStatus: false),
     );
 
     for (int i = 0; i < listNote.length; i++) {
@@ -51,6 +50,13 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
     sharedPreferences.setStringList(SaveData.saveTitle, listTitle);
     sharedPreferences.setStringList(SaveData.saveContent, listContent);
     sharedPreferences.setStringList(SaveData.saveTime, listTime);
+    final List<String> listStringStatus = [];
+    for (int i = 0; i < listStatus.length; i++) {
+      String item = listStatus[i].toString();
+      listStringStatus.add(item);
+      print(item);
+    }
+    sharedPreferences.setStringList(SaveData.saveStatus, listStringStatus);
 
     emit(
       state.copyWith(
@@ -88,11 +94,21 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
     listTitle = sharedPreferences.getStringList(SaveData.saveTitle) ?? [];
     listContent = sharedPreferences.getStringList(SaveData.saveContent) ?? [];
     listTime = sharedPreferences.getStringList(SaveData.saveTime) ?? [];
-    for (int i = 0; i < listTitle.length; i++) {
-      listNote.add(ItemNoteModel(
-          title: listTitle[i], content: listContent[i], time: listTime[i]));
+    listTime = sharedPreferences.getStringList(SaveData.saveTime) ?? [];
+    final List<String> listStringStatus =
+        sharedPreferences.getStringList(SaveData.saveStatus) ?? [];
+    for (int i = 0; i < listStringStatus.length; i++) {
+      bool item = bool.parse(listStringStatus[i]);
+      listStatus.add(item);
     }
 
+    for (int i = 0; i < listTitle.length; i++) {
+      listNote.add(ItemNoteModel(
+          title: listTitle[i],
+          content: listContent[i],
+          time: listTime[i],
+          noteStatus: listStatus[i]));
+    }
     emit(state.copyWith(notes: listNote));
   }
 

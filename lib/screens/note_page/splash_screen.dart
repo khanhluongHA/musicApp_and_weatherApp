@@ -48,16 +48,13 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF9EDDFF),
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
-              height: MediaQuery.of(context).size.height * 0.4,
-              width: MediaQuery.of(context).size.width * 0.4,
-              child: Lottie.asset('assets/animations/helu.json')),
+          Lottie.asset('assets/animations/hello.json',
+              fit: BoxFit.fill, width: 200, height: 300),
         ],
       )),
     );

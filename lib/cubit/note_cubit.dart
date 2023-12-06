@@ -22,25 +22,31 @@ class NoteCubit extends Cubit<NoteCubitState> {
     listTitle.clear();
     listContent.clear();
     listTime.clear();
+    listStatus.clear();
 
     listNote.add(
       ItemNoteModel(
-        title: title,
-        content: content,
-        time: _getTime(),
-      ),
+          title: title, content: content, time: _getTime(), noteStatus: false),
     );
 
     for (int i = 0; i < listNote.length; i++) {
       listTitle.add(listNote[i].title);
       listContent.add(listNote[i].content);
       listTime.add(listNote[i].time);
+      listStatus.add(listNote[i].noteStatus);
     }
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     sharedPreferences.setStringList(SaveData.saveTitle, listTitle);
     sharedPreferences.setStringList(SaveData.saveContent, listContent);
     sharedPreferences.setStringList(SaveData.saveTime, listTime);
+    final List<String> listStringStatus = [];
+    for (int i = 0; i < listStatus.length; i++) {
+      String item = listStatus[i].toString();
+      listStringStatus.add(item);
+      print(item);
+    }
+    sharedPreferences.setStringList(SaveData.saveStatus, listStringStatus);
 
     emit(
       state.copyWith(
@@ -54,6 +60,7 @@ class NoteCubit extends Cubit<NoteCubitState> {
     listTitle.clear();
     listContent.clear();
     listTime.clear();
+    listStatus.clear();
 
     emit(state.copyWith(status: StatusNoteState.start));
     listNote.removeAt(indexRemove);
@@ -77,15 +84,28 @@ class NoteCubit extends Cubit<NoteCubitState> {
     listTitle.clear();
     listContent.clear();
     listTime.clear();
+    listStatus.clear();
+
     emit(state.copyWith(notes: listNote));
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     listTitle = sharedPreferences.getStringList(SaveData.saveTitle) ?? [];
     listContent = sharedPreferences.getStringList(SaveData.saveContent) ?? [];
+
     listTime = sharedPreferences.getStringList(SaveData.saveTime) ?? [];
+    final List<String> listStringStatus =
+        sharedPreferences.getStringList(SaveData.saveStatus) ?? [];
+    for (int i = 0; i < listStringStatus.length; i++) {
+      bool item = bool.parse(listStringStatus[i]);
+      listStatus.add(item);
+    }
+
     for (int i = 0; i < listTitle.length; i++) {
       listNote.add(ItemNoteModel(
-          title: listTitle[i], content: listContent[i], time: listTime[i]));
+          title: listTitle[i],
+          content: listContent[i],
+          time: listTime[i],
+          noteStatus: listStatus[i]));
     }
 
     emit(state.copyWith(notes: listNote));
@@ -98,6 +118,8 @@ class NoteCubit extends Cubit<NoteCubitState> {
     listTitle.clear();
     listContent.clear();
     listTime.clear();
+    listStatus.clear();
+
     emit(state.copyWith(status: StatusNoteState.start));
     for (int i = 0; i < listNote.length; i++) {
       if (i == indexUpdated) {
@@ -117,5 +139,47 @@ class NoteCubit extends Cubit<NoteCubitState> {
     sharedPreferences.setStringList(SaveData.saveContent, listContent);
     sharedPreferences.setStringList(SaveData.saveTime, listTime);
     emit(state.copyWith(notes: listNote, status: StatusNoteState.end));
+  }
+
+  Future<void> setValueCheckBox(
+    int index,
+  ) async {
+    emit(state.copyWith(status: StatusNoteState.start));
+    listTitle.clear();
+    listContent.clear();
+    listTime.clear();
+    listStatus.clear();
+
+    for (int i = 0; i < listNote.length; i++) {
+      listTitle.add(listNote[i].title);
+      listContent.add(listNote[i].content);
+      listTime.add(listNote[i].time);
+      listStatus.add(listNote[i].noteStatus);
+    }
+
+    bool value = !listStatus[index];
+    listStatus[index] = value;
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+
+    final List<String> listStringStatus = [];
+    for (int i = 0; i < listStatus.length; i++) {
+      String item = listStatus[i].toString();
+      listStringStatus.add(item);
+      print(item);
+    }
+    sharedPreferences.setStringList(SaveData.saveStatus, listStringStatus);
+    listTitle = sharedPreferences.getStringList(SaveData.saveTitle) ?? [];
+    listContent = sharedPreferences.getStringList(SaveData.saveContent) ?? [];
+    listTime = sharedPreferences.getStringList(SaveData.saveTime) ?? [];
+    listNote.clear();
+    for (int i = 0; i < listTitle.length; i++) {
+      listNote.add(ItemNoteModel(
+          title: listTitle[i],
+          content: listContent[i],
+          time: listTime[i],
+          noteStatus: listStatus[i]));
+    }
+    emit(state.copyWith(status: StatusNoteState.end, notes: listNote));
   }
 }

@@ -51,8 +51,6 @@ class DrawerApp extends StatelessWidget {
             );
           },
           title: 'Music app'),
-      ItemDrawerModel(icon: Icons.call, onPressed: () {}, title: 'Contacts'),
-      ItemDrawerModel(icon: Icons.settings, onPressed: () {}, title: 'Setting'),
       ItemDrawerModel(
           icon: Icons.logout,
           onPressed: () {
