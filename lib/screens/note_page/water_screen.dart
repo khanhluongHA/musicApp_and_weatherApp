@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_bloc/config/print_color.dart';
 import 'package:test_bloc/cubit/water_cubit.dart';
 import 'package:test_bloc/cubit/water_state.dart';
 

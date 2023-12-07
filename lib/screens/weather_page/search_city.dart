@@ -2,26 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_bloc/bloc/weather_bloc.dart';
 import 'package:test_bloc/bloc/weather_state.dart';
-import 'package:test_bloc/config/app_size.dart';
 import 'package:test_bloc/screens/weather_page/wather_page.dart';
 
 // ignore: must_be_immutable
-class SearchCity extends StatelessWidget {
+class SearchCity extends StatefulWidget {
   SearchCity({super.key});
 
+  @override
+  State<SearchCity> createState() => _SearchCityState();
+}
+
+class _SearchCityState extends State<SearchCity> {
   final TextEditingController _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final WeatherBloc weatherBloc = context.read<WeatherBloc>();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tìm kiếm'),
+        title: const Text('Tìm kiếm'),
       ),
       body: SafeArea(
           child: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.15,
@@ -62,10 +71,11 @@ class SearchCity extends StatelessWidget {
             BlocListener<WeatherBloc, WeatherState>(
               listener: (context, state) {
                 if (state.status == WeatherStatus.success) {
-                  Navigator.pushReplacement(
+                  Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const WeatherPage()));
+                          builder: (context) => const WeatherPage()),
+                      (route) => false);
                 }
               },
               child: ElevatedButton(

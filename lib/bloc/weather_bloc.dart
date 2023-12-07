@@ -15,8 +15,12 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     on<GetDataWeatherEvent>(getDataWeather);
     on<GetLocation>(getLocation);
   }
+
+
+
   Future<void> getDataWeather(
       WeatherEvent event, Emitter<WeatherState> emit) async {
+        
     emit(state.copyWith(status: WeatherStatus.start));
     List<MainWeather> result = [];
     final data = state.isSearch

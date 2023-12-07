@@ -2,6 +2,7 @@ part of 'timer_cubit.dart';
 
 enum TimerStatus { initial, success,end, error }
 
+// ignore: must_be_immutable
 class TimerState extends Equatable {
   TimerState(
       {this.second = 60,
