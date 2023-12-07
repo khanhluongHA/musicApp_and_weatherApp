@@ -1,4 +1,3 @@
-
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +19,7 @@ class _MusicPlayerState extends State<MusicPlayer>
     with TickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> animation;
+   
 
   @override
   void initState() {
@@ -87,19 +87,27 @@ class _MusicPlayerState extends State<MusicPlayer>
               const SizedBox(
                 height: 30,
               ),
-              Text(
-                musics[musicCubit.state.currentMusic].name,
-                style: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Text(
+                  overflow: TextOverflow.ellipsis,
+                  musics[musicCubit.state.currentMusic].name,
+                  style: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600),
+                ),
               ),
-              Text(
-                musics[musicCubit.state.currentMusic].author,
-                style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.white.withOpacity(0.6),
-                    fontWeight: FontWeight.w600),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Text(
+                  overflow: TextOverflow.ellipsis,
+                  musics[musicCubit.state.currentMusic].author,
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.white.withOpacity(0.6),
+                      fontWeight: FontWeight.w600),
+                ),
               ),
               const SizedBox(
                 height: 20,

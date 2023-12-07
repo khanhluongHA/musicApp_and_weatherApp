@@ -14,6 +14,7 @@ class _InputTimeState extends State<InputTime> {
   final TextEditingController hourController = TextEditingController();
 
   final TextEditingController minuteController = TextEditingController();
+  final formKeyInputTimer = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -27,38 +28,40 @@ class _InputTimeState extends State<InputTime> {
     final TimerCubit timerCubit = context.read<TimerCubit>();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Timer app'),
+        title: const Text('Timer app'),
       ),
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Giờ',
-                      style: TextStyle(
-                        fontSize: 25,
+        child: Form(
+          key: formKeyInputTimer,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Giờ',
+                        style: TextStyle(
+                          fontSize: 25,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      child: TextField(
-                        controller: hourController,
-                        keyboardType: TextInputType.number,
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                Container(
-                  child: Column(
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.2,
+                        child: TextFormField(
+                          validator: _checkValidator,
+                          controller: hourController,
+                          keyboardType: TextInputType.number,
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Column(
                     children: [
                       const Text(
                         'Phút',
@@ -68,38 +71,48 @@ class _InputTimeState extends State<InputTime> {
                       ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.2,
-                        child: TextField(
+                        child: TextFormField(
+                          validator: _checkValidator,
                           controller: minuteController,
                           keyboardType: TextInputType.number,
                         ),
                       )
                     ],
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  timerCubit.setTime(
-                    int.parse(hourController.text),
-                    int.parse(minuteController.text),
-                  );
-                  hourController.text = '';
-                  minuteController.text = '';
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const TimerPage(),
-                    ),
-                  );
-                },
-                child: const Text('Bắt đầu'))
-          ],
+                ],
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    if (formKeyInputTimer.currentState!.validate()) {
+                      timerCubit.setTime(
+                        int.parse(hourController.text),
+                        int.parse(minuteController.text),
+                      );
+                      hourController.text = '';
+                      minuteController.text = '';
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const TimerPage(),
+                        ),
+                      );
+                    }
+                  },
+                  child: const Text('Bắt đầu'))
+            ],
+          ),
         ),
       ),
     );
   }
+}
+
+String? _checkValidator(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'Điền vào!';
+  }
+  return null;
 }

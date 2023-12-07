@@ -72,7 +72,7 @@ class _WeatherPageState extends State<WeatherPage> {
                                   MaterialPageRoute(
                                       builder: (context) => const HomeApp()));
                             },
-                            child: Icon(Icons.arrow_back)),
+                            child: const Icon(Icons.arrow_back)),
                         const Text(
                           'Weather app',
                           style: TextStyle(fontSize: 20),
