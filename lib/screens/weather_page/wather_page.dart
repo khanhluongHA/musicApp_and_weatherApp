@@ -48,10 +48,10 @@ class _WeatherPageState extends State<WeatherPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: const Color(0xFF8ACDD7),
-        body: BlocBuilder<WeatherBloc, WeatherState>(
+    return Scaffold(
+      backgroundColor: const Color(0xFF8ACDD7),
+      body: SafeArea(
+        child: BlocBuilder<WeatherBloc, WeatherState>(
           bloc: weatherBloc,
           builder: (context, state) {
             if (weatherBloc.state.dataWeather.isEmpty) {

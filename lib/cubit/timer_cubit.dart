@@ -75,12 +75,15 @@ class TimerCubit extends Cubit<TimerState> {
   void resetTimer() {
     emit(state.copyWith(
       status: TimerStatus.initial,
-      isActive: false,
     ));
     isFirst = true;
     timer?.cancel();
 
     emit(state.copyWith(
-        hour: 0, minute: 0, isRunning: false, status: TimerStatus.success));
+        hour: 0,
+        minute: 0,
+        isRunning: true,
+        isActive: false,
+        status: TimerStatus.end));
   }
 }

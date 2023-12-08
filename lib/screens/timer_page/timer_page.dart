@@ -9,117 +9,136 @@ class TimerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TimerCubit cubit = context.read<TimerCubit>();
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Timer'),
-      ),
-      body: SafeArea(
-        child: Center(
-          child: BlocBuilder<TimerCubit, TimerState>(
-            builder: (context, state) {
-              return Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.3,
-                    ),
-                    state.second == 0 && state.hour == 0 && state.minute == 0
-                        ? const Text(
-                            'Done',
-                            style: TextStyle(fontSize: 50, color: Colors.green),
-                          )
-                        : Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '${state.hour} :',
-                                style: const TextStyle(
-                                    fontSize: 60,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.red),
-                              ),
-                              Text(
-                                '${state.minute} :',
-                                style: const TextStyle(
-                                    fontSize: 60,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.red),
-                              ),
-                              Text(
-                                '${state.second}',
-                                style: const TextStyle(
-                                    fontSize: 60,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.red),
-                              ),
-                            ],
-                          ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    state.isActive
-                        ? Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              state.second == 0
-                                  ? const SizedBox()
-                                  : SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.grey),
-                                        onPressed: () {
-                                          cubit.stopTimer();
-                                        },
-                                        child: Text(
-                                          state.isRunning
-                                              ? 'Pause'
-                                              : 'Continue',
-                                          style: const TextStyle(
-                                              color: Colors.white),
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: Center(
+            child: BlocBuilder<TimerCubit, TimerState>(
+              builder: (context, state) {
+                return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Timer',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w500),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.3,
+                      ),
+                      state.second == 0 && state.hour == 0 && state.minute == 0
+                          ? const Text(
+                              'Done',
+                              style:
+                                  TextStyle(fontSize: 50, color: Colors.green),
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '${state.hour} :',
+                                  style: const TextStyle(
+                                      fontSize: 60,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.red),
+                                ),
+                                Text(
+                                  '${state.minute} :',
+                                  style: const TextStyle(
+                                      fontSize: 60,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.red),
+                                ),
+                                Text(
+                                  '${state.second}',
+                                  style: const TextStyle(
+                                      fontSize: 60,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.red),
+                                ),
+                              ],
+                            ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      state.isActive
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                state.second == 0
+                                    ? const SizedBox()
+                                    : SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.3,
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              backgroundColor: Colors.grey),
+                                          onPressed: () {
+                                            cubit.stopTimer();
+                                          },
+                                          child: Text(
+                                            state.isRunning
+                                                ? 'Pause'
+                                                : 'Continue',
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                          ),
                                         ),
                                       ),
+                                SizedBox(
+                                  width: state.second == 0 ? 0 : 30,
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.3,
+                                  child:
+                                      BlocListener<TimerCubit, TimerState>(
+                                    listener: (context, state) {
+                                    if(state.status == TimerStatus.end){
+ Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    InputTime()));
+                                    }
+                                    },
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.grey),
+                                      onPressed: () {
+                                       
+                                        cubit.resetTimer();
+                                      },
+                                      child: const Text(
+                                        'Cancel',
+                                        style: TextStyle(color: Colors.red),
+                                      ),
                                     ),
-                              SizedBox(
-                                width: state.second == 0 ? 0 : 30,
-                              ),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.3,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.grey),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => InputTime()));
-                                    cubit.resetTimer();
-                                  },
-                                  child: const Text(
-                                    'Cancel',
-                                    style: TextStyle(color: Colors.red),
                                   ),
                                 ),
-                              ),
-                            ],
-                          )
-                        : SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.green),
-                              onPressed: () {
-                                cubit.startTimer();
-                              },
-                              child: const Text(
-                                'Start',
-                                style: TextStyle(color: Colors.white),
+                              ],
+                            )
+                          : SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.green),
+                                onPressed: () {
+                                  cubit.startTimer();
+                                },
+                                child: const Text(
+                                  'Start',
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                             ),
-                          ),
-                  ]);
-            },
+                    ]);
+              },
+            ),
           ),
         ),
       ),

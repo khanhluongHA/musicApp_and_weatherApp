@@ -25,13 +25,37 @@ class _SearchCityState extends State<SearchCity> {
   Widget build(BuildContext context) {
     final WeatherBloc weatherBloc = context.read<WeatherBloc>();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tìm kiếm'),
-      ),
       body: SafeArea(
           child: Center(
         child: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Icon(
+                      Icons.arrow_back,
+                      size: 30,
+                    ),
+                  ),
+                  const Text(
+                    'Tìm kiếm thành phố',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(
+                    width: 30,
+                  ),
+                ],
+              ),
+            ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.15,
             ),

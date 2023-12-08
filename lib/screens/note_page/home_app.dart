@@ -121,7 +121,8 @@ class _HomeAppState extends State<HomeApp> {
                                                         .notes[index].title,
                                                     content: state
                                                         .notes[index].content,
-                                                    isStatus: state.notes[index].noteStatus,
+                                                    isStatus: state.notes[index]
+                                                        .noteStatus,
                                                   )));
                                     },
                                     onTapDelete: () {
