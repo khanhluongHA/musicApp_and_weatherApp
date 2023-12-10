@@ -8,5 +8,6 @@ class SaveData {
   static const String saveContent = 'SAVE_CONTENT';
   static const String saveTime = 'SAVE_TIME';
   static const String saveStatus = 'SAVE_STATUS';
-
+  static const String saveImages = 'SAVE_IMAGES';
+  static const String saveNotes = 'SAVE_NOTES';
 }

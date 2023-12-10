@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:test_bloc/models/item_note_model.dart';
 
 // ignore: must_be_immutable
 class ItemNote extends StatefulWidget {
   ItemNote(
       {super.key,
-      this.titleNote = '',
-      this.contentNote = '',
-      this.timeNote = '',
+      required this.note,
       required this.onTapDelete,
       required this.onTapChanged,
       required this.onClick,
       required this.callbackCheckBox,
-      this.isStatus = false});
-  final String titleNote;
-  final String contentNote;
-  final String timeNote;
+    });
+ final ItemNoteModel note;
   final VoidCallback onTapDelete;
   final VoidCallback onTapChanged;
   final VoidCallback onClick;
   final VoidCallback callbackCheckBox;
-  late bool? isStatus;
+
 
   @override
   State<ItemNote> createState() => _ItemNoteState();
@@ -46,7 +43,7 @@ class _ItemNoteState extends State<ItemNote> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  widget.timeNote,
+                 widget.note.time,
                   style: const TextStyle(fontSize: 14, color: Colors.green),
                 ),
                 Row(
@@ -55,7 +52,7 @@ class _ItemNoteState extends State<ItemNote> {
                     const Text('Trạng thái: '),
                     Checkbox(
                       isError: true,
-                      value: widget.isStatus,
+                      value: widget.note.noteStatus,
                       focusColor: Colors.red,
                       activeColor: Colors.green,
                       onChanged: (bool? value) {
@@ -75,7 +72,7 @@ class _ItemNoteState extends State<ItemNote> {
             ),
             Text(
               overflow: TextOverflow.ellipsis,
-              widget.titleNote,
+              widget.note.title,
               style: const TextStyle(fontSize: 13),
             ),
             const SizedBox(
@@ -92,7 +89,7 @@ class _ItemNoteState extends State<ItemNote> {
               width: MediaQuery.of(context).size.width,
               child: Text(
                 overflow: TextOverflow.ellipsis,
-                widget.contentNote,
+                widget.note.content,
                 style: const TextStyle(fontSize: 13),
               ),
             ),

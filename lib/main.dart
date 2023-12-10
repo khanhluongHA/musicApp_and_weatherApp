@@ -8,8 +8,11 @@ import 'package:test_bloc/cubit/register_cubit.dart';
 import 'package:test_bloc/cubit/timer_cubit.dart';
 import 'package:test_bloc/cubit/water_cubit.dart';
 import 'package:test_bloc/screens/note_page/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 

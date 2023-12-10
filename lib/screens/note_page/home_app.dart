@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:test_bloc/config/print_color.dart';
-import 'package:test_bloc/config/save_data.dart';
 import 'package:test_bloc/cubit/note_cubit.dart';
+import 'package:test_bloc/models/item_note_model.dart';
+import 'package:test_bloc/screens/note_page/add_note.dart';
 import 'package:test_bloc/screens/note_page/ditail_note.dart';
 import 'package:test_bloc/widgets/alert_dialog_note.dart';
 import 'package:test_bloc/widgets/drawer_app.dart';
@@ -17,8 +16,6 @@ class HomeApp extends StatefulWidget {
 }
 
 class _HomeAppState extends State<HomeApp> {
-  String userName = '';
-  String password = '';
   TextEditingController titleController = TextEditingController();
   TextEditingController contentController = TextEditingController();
 
@@ -27,23 +24,11 @@ class _HomeAppState extends State<HomeApp> {
 
   late NoteCubit noteCubit;
 
-  void _getData() async {
-    final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
-    setState(() {
-      userName = sharedPreferences.getString(SaveData.saveUserName) ?? '';
-      password = sharedPreferences.getString(SaveData.savePassword) ?? '';
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-
     noteCubit = context.read<NoteCubit>();
-    _getData();
-
-    noteCubit.getDataNote();
+    noteCubit.getData();
   }
 
   @override
@@ -59,22 +44,8 @@ class _HomeAppState extends State<HomeApp> {
             size: 30,
           ),
           onPressed: () {
-            AlertDialogNote(
-              contentController: contentController,
-              titleController: titleController,
-              context: context,
-              content: '',
-              title: 'Thêm ghi chú',
-              onPressed: () {
-                noteCubit.addNote(
-                    title: titleController.text,
-                    content: contentController.text);
-                titleController.text = '';
-                contentController.text = '';
-                Navigator.pop(context);
-                printRed(titleController.text);
-              },
-            );
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const AddNoteScreen()));
           },
         ),
         drawer: const DrawerApp(),
@@ -93,73 +64,87 @@ class _HomeAppState extends State<HomeApp> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    state.notes.isEmpty
+                    noteCubit.state.notes.isEmpty
                         ? const Text(
                             'Ghi chú trống !',
                             style: TextStyle(fontSize: 25, color: Colors.grey),
                           )
                         : Expanded(
                             child: ListView.separated(
-                                padding: const EdgeInsets.only(bottom: 65),
-                                itemBuilder: (context, index) {
-                                  return ItemNote(
-                                    titleNote: state.notes[index].title,
-                                    contentNote: state.notes[index].content,
-                                    timeNote: state.notes[index].time,
-                                    isStatus: state.notes[index].noteStatus,
-                                    callbackCheckBox: () {
-                                      noteCubit.setValueCheckBox(index);
-                                    },
-                                    onClick: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => DetailNote(
-                                                    date:
-                                                        state.notes[index].time,
-                                                    title: state
-                                                        .notes[index].title,
-                                                    content: state
-                                                        .notes[index].content,
-                                                    isStatus: state.notes[index]
-                                                        .noteStatus,
-                                                  )));
-                                    },
-                                    onTapDelete: () {
-                                      noteCubit.removeNote(indexRemove: index);
-                                    },
-                                    onTapChanged: () {
-                                      titleUpdateController.text =
-                                          state.notes[index].title;
-                                      contentUpdateController.text =
-                                          state.notes[index].content;
-                                      AlertDialogNote(
-                                        context: context,
-                                        title: 'Thay đổi ghi chú',
-                                        onPressed: () {
-                                          noteCubit.updateNote(
-                                              indexUpdated: index,
-                                              titleChanged:
-                                                  titleUpdateController.text,
-                                              contentChanged:
-                                                  contentUpdateController.text);
+                              padding: const EdgeInsets.only(bottom: 65),
+                              itemCount: noteCubit.state.notes.length,
+                              itemBuilder: (context, index) {
+                                return ItemNote(
+                                  note: noteCubit.state.notes[index],
+                                  callbackCheckBox: () {
+                                    noteCubit.updateNote(
+                                        ItemNoteModel(
+                                            title: noteCubit
+                                                .state.notes[index].title,
+                                            content: noteCubit
+                                                .state.notes[index].content,
+                                            time: noteCubit
+                                                .state.notes[index].time,
+                                            noteStatus: !noteCubit
+                                                .state.notes[index].noteStatus,
+                                            linkImage: noteCubit
+                                                .state.notes[index].linkImage),
+                                        index);
+                                  },
+                                  onClick: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => DetailNote(
+                                          index: index,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  onTapDelete: () {
+                                    noteCubit.removeNote(
+                                      index,
+                                    );
+                                  },
+                                  onTapChanged: () {
+                                    titleUpdateController.text =
+                                        noteCubit.state.notes[index].title;
+                                    contentUpdateController.text =
+                                        noteCubit.state.notes[index].content;
+                                    AlertDialogNote(
+                                      context: context,
+                                      title: 'Thay đổi ghi chú',
+                                      onPressed: () {
+                                        noteCubit.updateNote(
+                                            ItemNoteModel(
+                                                title:
+                                                    titleUpdateController.text,
+                                                content: contentUpdateController
+                                                    .text,
+                                                time: noteCubit
+                                                    .state.notes[index].time,
+                                                noteStatus: noteCubit.state
+                                                    .notes[index].noteStatus,
+                                                linkImage: noteCubit.state
+                                                    .notes[index].linkImage),
+                                            index);
 
-                                          Navigator.pop(context);
-                                        },
-                                        content: '',
-                                        titleController: titleUpdateController,
-                                        contentController:
-                                            contentUpdateController,
-                                      );
-                                    },
-                                  );
-                                },
-                                separatorBuilder: (context, index) {
-                                  return const SizedBox(
-                                    height: 10,
-                                  );
-                                },
-                                itemCount: state.notes.length),
+                                        Navigator.pop(context);
+                                      },
+                                      content: '',
+                                      titleController: titleUpdateController,
+                                      contentController:
+                                          contentUpdateController,
+                                    );
+                                  },
+                                );
+                              },
+                              separatorBuilder: (context, index) {
+                                return const SizedBox(
+                                  height: 10,
+                                );
+                              },
+                            ),
                           ),
                   ],
                 ),
@@ -170,4 +155,11 @@ class _HomeAppState extends State<HomeApp> {
       ),
     );
   }
+}
+
+_getTime() {
+  var time = DateTime.now();
+  var dataTime = time.toString().split(' ');
+
+  return dataTime[0];
 }

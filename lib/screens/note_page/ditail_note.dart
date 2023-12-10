@@ -1,103 +1,154 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_bloc/config/app_color.dart';
 import 'package:test_bloc/config/app_size.dart';
+import 'package:test_bloc/cubit/note_cubit.dart';
 
-class DetailNote extends StatelessWidget {
-  const DetailNote(
-      {super.key,
-      this.date = '',
-      this.title = '',
-      this.content = '',
-      this.isStatus = false});
-  final String date;
-  final String title;
-  final String content;
-  final bool isStatus;
+class DetailNote extends StatefulWidget {
+  const DetailNote({
+    super.key,
+    this.index = 0,
+  });
+  final int index;
+
+  @override
+  State<DetailNote> createState() => _DetailNoteState();
+}
+
+class _DetailNoteState extends State<DetailNote> {
+  late NoteCubit cubit;
+  bool isAppear = false;
+
+  @override
+  void initState() {
+    cubit = context.read<NoteCubit>();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          padding: const EdgeInsets.all(10),
+          child: BlocBuilder<NoteCubit, NoteCubitState>(
+            builder: (context, state) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: SizedBox(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: const SizedBox(
+                            height: 40,
+                            width: 40,
+                            child: Icon(
+                              Icons.arrow_back,
+                              size: 30,
+                            )),
+                      ),
+                      const Text(
+                        'Chi tiết ghi chú',
+                        style: TextStyle(fontSize: AppSize.size20),
+                      ),
+                      const SizedBox(
                         height: 40,
                         width: 40,
-                        child: Icon(
-                          Icons.arrow_back,
-                          size: 30,
-                        )),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
                   ),
                   Text(
-                    'Chi tiết ghi chú',
-                    style: TextStyle(fontSize: AppSize.size20),
+                    'Ngày: ${state.notes[widget.index].time}',
+                    style: const TextStyle(
+                        fontSize: AppSize.size20, color: Colors.grey),
                   ),
-                  SizedBox(
-                    height: 40,
-                    width: 40,
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Ngày: $date',
-                style: const TextStyle(
-                    fontSize: AppSize.size20, color: Colors.grey),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  const Text(
-                    'Trạng thái: ',
-                    style: TextStyle(
-                        fontSize: AppSize.size18, fontWeight: FontWeight.w600),
+                  const SizedBox(
+                    height: 20,
                   ),
+                  Row(
+                    children: [
+                      const Text(
+                        'Trạng thái: ',
+                        style: TextStyle(
+                            fontSize: AppSize.size18,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        state.notes[widget.index].noteStatus
+                            ? ' Đã làm'
+                            : 'Chưa làm',
+                        style: TextStyle(
+                            color: state.notes[widget.index].noteStatus
+                                ? AppColors.green
+                                : Colors.red,
+                            fontSize: AppSize.size18),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text('Tiêu đề:',
+                      style: TextStyle(
+                          fontSize: AppSize.size18,
+                          fontWeight: FontWeight.w600)),
                   const SizedBox(
                     height: 5,
                   ),
-                  Text(
-                    isStatus ? ' Đã làm' : 'Chưa làm',
-                    style: TextStyle(
-                        color: isStatus ? AppColors.green : Colors.red,
-                        fontSize: AppSize.size18),
+                  Text(state.notes[widget.index].title),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text('Nội dung:',
+                      style: TextStyle(
+                          fontSize: AppSize.size18,
+                          fontWeight: FontWeight.w600)),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(state.notes[widget.index].content),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Center(
+                    child: Column(
+                      children: [
+                        state.notes[widget.index].linkImage.isNotEmpty
+                            ? Image(
+                                image: NetworkImage(
+                                    state.notes[widget.index].linkImage),
+                                height: 100,
+                                width: 100,
+                                fit: BoxFit.fill,
+                              )
+                            : const SizedBox(),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.5,
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Ok')))
+                      ],
+                    ),
                   ),
                 ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text('Tiêu đề:',
-                  style: TextStyle(
-                      fontSize: AppSize.size18, fontWeight: FontWeight.w600)),
-              const SizedBox(
-                height: 5,
-              ),
-              Text('$title'),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text('Nội dung:',
-                  style: TextStyle(
-                      fontSize: AppSize.size18, fontWeight: FontWeight.w600)),
-              const SizedBox(
-                height: 5,
-              ),
-              Text('$content')
-            ],
+              );
+            },
           ),
         ),
       ),

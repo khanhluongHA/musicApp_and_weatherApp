@@ -11,11 +11,12 @@ class AddNote extends NoteEvent {
   final String newTitle;
   final String newContent;
   final String newTime;
-  const AddNote({
-    this.newTitle = '',
-    this.newContent = '',
-    this.newTime = '',
-  });
+  final String image;
+  const AddNote(
+      {this.newTitle = '',
+      this.newContent = '',
+      this.newTime = '',
+      this.image = ''});
   @override
   List<Object> get props => [newTitle, newContent, newTime];
 }

@@ -1,15 +1,20 @@
 part of 'note_cubit.dart';
 
-enum StatusNoteState { start, end }
+enum NoteStatus { init, start, end, error }
 
 class NoteCubitState extends Equatable {
   const NoteCubitState({
     this.notes = const [],
-    this.status = StatusNoteState.start,
+    this.status = NoteStatus.start,
   });
+
   final List<ItemNoteModel> notes;
   final Enum status;
-  NoteCubitState copyWith({List<ItemNoteModel>? notes, Enum? status}) {
+
+  NoteCubitState copyWith({
+    List<ItemNoteModel>? notes,
+    Enum? status,
+  }) {
     return NoteCubitState(
       notes: notes ?? this.notes,
       status: status ?? this.status,
@@ -17,5 +22,8 @@ class NoteCubitState extends Equatable {
   }
 
   @override
-  List<Object> get props => [notes, status];
+  List<Object> get props => [
+        notes,
+        status,
+      ];
 }

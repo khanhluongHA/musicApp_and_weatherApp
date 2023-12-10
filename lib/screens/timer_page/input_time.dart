@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_bloc/cubit/timer_cubit.dart';
+import 'package:test_bloc/screens/note_page/home_app.dart';
 import 'package:test_bloc/screens/timer_page/timer_page.dart';
+import 'package:test_bloc/widgets/header_app.dart';
 
 class InputTime extends StatefulWidget {
   InputTime({super.key});
@@ -27,15 +29,21 @@ class _InputTimeState extends State<InputTime> {
   Widget build(BuildContext context) {
     final TimerCubit timerCubit = context.read<TimerCubit>();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Timer app'),
-      ),
       body: SafeArea(
         child: Form(
           key: formKeyInputTimer,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              HeaderApp(
+                title: 'Timer app',
+                callback: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const HomeApp()));
+                },
+              ),
+              const SizedBox(
+                height: 100,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

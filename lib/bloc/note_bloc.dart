@@ -32,13 +32,14 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
   Future<void> addNote(AddNote event, Emitter<NoteState> emit) async {
     emit(state.copyWith(status: StatusNoteState.start));
 
-    listNote.add(
-      ItemNoteModel(
-          title: event.newTitle,
-          content: event.newContent,
-          time: _getTime(),
-          noteStatus: false),
-    );
+    // listNote.add(
+    //   ItemNoteModel(
+    //       title: event.newTitle,
+    //       content: event.newContent,
+    //       time: _getTime(),
+    //       noteStatus: false),
+
+    // );
 
     for (int i = 0; i < listNote.length; i++) {
       listTitle.add(listNote[i].title);
@@ -103,11 +104,11 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
     }
 
     for (int i = 0; i < listTitle.length; i++) {
-      listNote.add(ItemNoteModel(
-          title: listTitle[i],
-          content: listContent[i],
-          time: listTime[i],
-          noteStatus: listStatus[i]));
+      // listNote.add(ItemNoteModel(
+      //     title: listTitle[i],
+      //     content: listContent[i],
+      //     time: listTime[i],
+      //     noteStatus: listStatus[i]));
     }
     emit(state.copyWith(notes: listNote));
   }
