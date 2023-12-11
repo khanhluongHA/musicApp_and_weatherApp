@@ -59,152 +59,149 @@ class _WeatherPageState extends State<WeatherPage> {
                 child: CircularProgressIndicator(),
               );
             } else {
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const HomeApp()));
-                            },
-                            child: const Icon(Icons.arrow_back)),
-                        const Text(
-                          'Weather app',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SearchCity()));
-                            },
-                            child: const SizedBox(
-                                width: 40,
-                                height: 40,
-                                child: Icon(Icons.search))),
-                      ],
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          height: 50,
-                        ),
-                        Text(
-                          weatherBloc.state.city,
-                          style: const TextStyle(
-                              color: AppColors.white, fontSize: AppSize.size30),
-                        ),
-                        Text(
-                          ' ${weatherBloc.state.dataWeather[1].temp.ceil()}°',
-                          style: const TextStyle(
-                              color: AppColors.white,
-                              fontSize: AppSize.size90,
-                              fontWeight: FontWeight.w200),
-                        ),
-                        Text(
-                          'T:${weatherBloc.state.dataWeather[1].temp_min.ceil() - 3}°   C:${weatherBloc.state.dataWeather[1].temp_max.ceil() + 2}°',
-                          style: const TextStyle(
-                              color: AppColors.white, fontSize: AppSize.size20),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          'Độ ẩm: ${weatherBloc.state.dataWeather[0].humidity}% ',
-                          style: const TextStyle(
-                              color: AppColors.white, fontSize: AppSize.size20),
-                        ),
-                        const SizedBox(
-                          height: 50,
-                        ),
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Dự báo thời tiết 5 ngày',
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.white),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 180,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 10),
-                        separatorBuilder: (context, index) {
-                          return const SizedBox(
-                            width: 10,
-                            height: 10,
-                          );
-                        },
-                        itemCount: 5,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            padding: const EdgeInsets.only(
-                                right: 8, left: 8, top: 30, bottom: 10),
-                            width: 130,
-                            height: 180,
-                            decoration: BoxDecoration(
-                                color: const Color(0xff9BB8CD),
-                                borderRadius: BorderRadius.circular(8)),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '${days[index]}',
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      '${weatherBloc.state.dataWeather[weather5day[index]].temp_min.ceil() - 3}°',
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                    Text('-'),
-                                    Text(
-                                      '${weatherBloc.state.dataWeather[weather5day[index]].temp_max.ceil() + 2}°',
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Text(
-                                  'Độ ẩm: ${weatherBloc.state.dataWeather[weather5day[index]].humidity}% ',
-                                  style: const TextStyle(
-                                      color: AppColors.white,
-                                      fontSize: AppSize.size10),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
+              return Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HomeApp()));
+                          },
+                          child: const Icon(Icons.arrow_back)),
+                      const Text(
+                        'Weather app',
+                        style: TextStyle(fontSize: 20),
                       ),
-                    )
-                  ],
-                ),
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SearchCity()));
+                          },
+                          child: const SizedBox(
+                              width: 40,
+                              height: 40,
+                              child: Icon(Icons.search))),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      Text(
+                        weatherBloc.state.city,
+                        style: const TextStyle(
+                            color: AppColors.white, fontSize: AppSize.size30),
+                      ),
+                      Text(
+                        ' ${weatherBloc.state.dataWeather[1].temp.ceil()}°',
+                        style: const TextStyle(
+                            color: AppColors.white,
+                            fontSize: AppSize.size90,
+                            fontWeight: FontWeight.w200),
+                      ),
+                      Text(
+                        'T:${weatherBloc.state.dataWeather[1].temp_min.ceil() - 3}°   C:${weatherBloc.state.dataWeather[1].temp_max.ceil() + 2}°',
+                        style: const TextStyle(
+                            color: AppColors.white, fontSize: AppSize.size20),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Độ ẩm: ${weatherBloc.state.dataWeather[0].humidity}% ',
+                        style: const TextStyle(
+                            color: AppColors.white, fontSize: AppSize.size20),
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Dự báo thời tiết 5 ngày',
+                            style: TextStyle(fontSize: 18, color: Colors.white),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 180,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 10),
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(
+                          width: 10,
+                          height: 10,
+                        );
+                      },
+                      itemCount: 5,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          padding: const EdgeInsets.only(
+                              right: 8, left: 8, top: 30, bottom: 10),
+                          width: 130,
+                          height: 180,
+                          decoration: BoxDecoration(
+                              color: const Color(0xff9BB8CD),
+                              borderRadius: BorderRadius.circular(8)),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                '${days[index]}',
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    '${weatherBloc.state.dataWeather[weather5day[index]].temp_min.ceil() - 3}°',
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  Text('-'),
+                                  Text(
+                                    '${weatherBloc.state.dataWeather[weather5day[index]].temp_max.ceil() + 2}°',
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                'Độ ẩm: ${weatherBloc.state.dataWeather[weather5day[index]].humidity}% ',
+                                style: const TextStyle(
+                                    color: AppColors.white,
+                                    fontSize: AppSize.size10),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  )
+                ],
               );
             }
           },

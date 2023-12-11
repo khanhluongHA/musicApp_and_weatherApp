@@ -1,3 +1,7 @@
+
+import 'package:json_annotation/json_annotation.dart';
+part 'location_model.g.dart';
+@JsonSerializable()
 class LocationModel {
   final String name;
     final Map<String, dynamic> local_names;
@@ -13,15 +17,10 @@ class LocationModel {
         required this.country,
     });
 
-    factory LocationModel.fromJson(Map<String, dynamic> json) {
-    return LocationModel(
-      name: json['name'],
-      local_names: json['local_names'],
-      lat: json['lat'],
-      lon: json['lon'],
-      country: json['country'],
-    );
-  }
+    factory LocationModel.fromJson(Map<String, dynamic> json) => _$LocationModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LocationModelToJson(this);
+
 
   static List<LocationModel> convertToList(List<dynamic> json) {
     //json ở đây là data

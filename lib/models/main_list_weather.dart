@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'main_list_weather.g.dart';
+
+@JsonSerializable()
 class MainWeather {
   final double temp;
   final double feels_like;
@@ -21,19 +26,10 @@ class MainWeather {
     required this.temp_kf,
   });
 
-  factory MainWeather.fromJson(Map<String, dynamic> json) {
-    return MainWeather(
-      temp: json['temp'].toDouble(),
-      feels_like: json['feels_like'].toDouble(),
-      temp_min: json['temp_min'].toDouble(),
-      temp_max: json['temp_max'].toDouble(),
-      pressure: json['pressure'],
-      sea_level: json['sea_level'],
-      grnd_level: json['grnd_level'],
-      humidity: json['humidity'],
-      temp_kf: json['temp_kf'].toDouble(),
-    );
-  }
+  factory MainWeather.fromJson(Map<String, dynamic> json) =>
+      _$MainWeatherFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MainWeatherToJson(this);
 
   static List<MainWeather> convertToList(List<dynamic> json) {
     //json ở đây là data

@@ -8,10 +8,10 @@ part of 'item_note_model.dart';
 
 ItemNoteModel _$ItemNoteModelFromJson(Map<String, dynamic> json) =>
     ItemNoteModel(
-      title: json['title'] as String,
-      content: json['content'] as String,
-      time: json['time'] as String,
-      noteStatus: json['noteStatus'] as bool,
+      title: json['title'] as String? ?? '',
+      content: json['content'] as String? ?? '',
+      time: json['time'] as String? ?? '',
+      noteStatus: json['noteStatus'] as bool? ?? false,
       linkImage: json['linkImage'] as String,
     );
 

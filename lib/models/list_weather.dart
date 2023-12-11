@@ -1,4 +1,7 @@
+import 'package:json_annotation/json_annotation.dart';
+part 'list_weather.g.dart';
 
+@JsonSerializable()
 class ListWeather {
   final int dt;
   final Map main;
@@ -21,19 +24,10 @@ class ListWeather {
       required this.sys,
       required this.dt_txt});
 
-  factory ListWeather.fromJson(Map<String, dynamic> json) {
-    return ListWeather(
-      dt: json['dt'],
-      main: json['main'],
-      weather: json['weather'],
-      clouds: json['clouds'],
-      wind: json['wind'],
-      visibility: json['visibility'],
-      pop: json['pop'],
-      sys: json['sys'],
-      dt_txt: json['dt_txt'],
-    );
-  }
+  factory ListWeather.fromJson(Map<String, dynamic> json) =>
+      _$ListWeatherFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ListWeatherToJson(this);
 
   static List<ListWeather> convertToList(List<dynamic> json) {
     //json ở đây là data

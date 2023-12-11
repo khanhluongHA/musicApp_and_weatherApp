@@ -104,6 +104,8 @@ class _SearchCityState extends State<SearchCity> {
               },
               child: ElevatedButton(
                   onPressed: () async {
+                    FocusScope.of(context).unfocus();
+
                     weatherBloc.add(GetLocation(
                         city: _controller.text.trim().toUpperCase()));
                     // ignore: use_build_context_synchronously
