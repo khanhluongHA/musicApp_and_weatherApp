@@ -63,36 +63,37 @@ class _DetailNoteState extends State<DetailNote> {
                     ],
                   ),
                   const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'Ngày: ${state.notes[widget.index].time}',
-                    style: const TextStyle(
-                        fontSize: AppSize.size20, color: Colors.grey),
-                  ),
-                  const SizedBox(
-                    height: 20,
+                    height: 30,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        'Trạng thái: ',
-                        style: TextStyle(
-                            fontSize: AppSize.size18,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
                       Text(
-                        state.notes[widget.index].noteStatus
-                            ? ' Đã làm'
-                            : 'Chưa làm',
-                        style: TextStyle(
-                            color: state.notes[widget.index].noteStatus
-                                ? AppColors.green
-                                : Colors.red,
-                            fontSize: AppSize.size18),
+                        'Ngày: ${state.notes[widget.index].time}',
+                        style: const TextStyle(
+                            fontSize: AppSize.size15, color: Colors.grey),
+                      ),
+                      Row(
+                        children: [
+                          const Text(
+                            'Trạng thái: ',
+                            style: TextStyle(
+                                fontSize: AppSize.size15, color: Colors.grey),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            state.notes[widget.index].noteStatus
+                                ? ' Đã làm'
+                                : 'Chưa làm',
+                            style: TextStyle(
+                                color: state.notes[widget.index].noteStatus
+                                    ? AppColors.green
+                                    : Colors.red,
+                                fontSize: AppSize.size15),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -122,29 +123,28 @@ class _DetailNoteState extends State<DetailNote> {
                     height: 10,
                   ),
                   Center(
-                    child: Column(
-                      children: [
-                        state.notes[widget.index].linkImage.isNotEmpty
-                            ? Image(
-                                image: NetworkImage(
-                                    state.notes[widget.index].linkImage),
-                                height: 100,
-                                width: 100,
-                                fit: BoxFit.fill,
-                              )
-                            : const SizedBox(),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Text('Ok')))
-                      ],
-                    ),
+                    child: state.notes[widget.index].linkImage.isNotEmpty
+                        ? Image(
+                            image: NetworkImage(
+                                state.notes[widget.index].linkImage),
+                            height: 100,
+                            width: 100,
+                            fit: BoxFit.fill,
+                          )
+                        : const SizedBox(),
+                  ),
+                  Expanded(child: SizedBox()),
+                  Center(
+                    child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('Ok'))),
+                  ),
+                  SizedBox(
+                    height: 100,
                   ),
                 ],
               );

@@ -3,20 +3,19 @@ import 'package:test_bloc/models/item_note_model.dart';
 
 // ignore: must_be_immutable
 class ItemNote extends StatefulWidget {
-  ItemNote(
-      {super.key,
-      required this.note,
-      required this.onTapDelete,
-      required this.onTapChanged,
-      required this.onClick,
-      required this.callbackCheckBox,
-    });
- final ItemNoteModel note;
+  ItemNote({
+    super.key,
+    required this.note,
+    required this.onTapDelete,
+    required this.onTapChanged,
+    required this.onClick,
+    required this.callbackCheckBox,
+  });
+  final ItemNoteModel note;
   final VoidCallback onTapDelete;
   final VoidCallback onTapChanged;
   final VoidCallback onClick;
   final VoidCallback callbackCheckBox;
-
 
   @override
   State<ItemNote> createState() => _ItemNoteState();
@@ -43,8 +42,11 @@ class _ItemNoteState extends State<ItemNote> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                 widget.note.time,
-                  style: const TextStyle(fontSize: 14, color: Colors.green),
+                  widget.note.time,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -56,42 +58,58 @@ class _ItemNoteState extends State<ItemNote> {
                       focusColor: Colors.red,
                       activeColor: Colors.green,
                       onChanged: (bool? value) {
-                       widget.callbackCheckBox.call();
+                        widget.callbackCheckBox.call();
                       },
                     ),
                   ],
                 ),
               ],
             ),
-            const Text(
-              'Tiêu đề: ',
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF6499E9)),
-            ),
-            Text(
-              overflow: TextOverflow.ellipsis,
-              widget.note.title,
-              style: const TextStyle(fontSize: 13),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            const Text(
-              'Nội dung: ',
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF6499E9)),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Text(
-                overflow: TextOverflow.ellipsis,
-                widget.note.content,
-                style: const TextStyle(fontSize: 13),
-              ),
+            Row(
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.4,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Tiêu đề: ',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF6499E9)),
+                      ),
+                      Text(
+                        overflow: TextOverflow.ellipsis,
+                        widget.note.title,
+                        style: const TextStyle(fontSize: 13),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.4,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Nội dung: ',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF6499E9)),
+                      ),
+                      SizedBox(
+                        child: Text(
+                          overflow: TextOverflow.ellipsis,
+                          widget.note.content,
+                          style: const TextStyle(fontSize: 13),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
             const SizedBox(
               height: 5,

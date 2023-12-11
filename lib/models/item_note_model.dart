@@ -16,15 +16,9 @@ class ItemNoteModel {
       required this.noteStatus,
       required this.linkImage});
 
-  factory ItemNoteModel.fromJson(Map<String, dynamic> json) {
-    return ItemNoteModel(
-      title: json['title'],
-      content: json['content'],
-      time: json['time'],
-      noteStatus: json['noteStatus'],
-      linkImage: json['linkImage'],
-    );
-  }
+  factory ItemNoteModel.fromJson(Map<String, dynamic> json) =>
+      _$ItemNoteModelFromJson(json);
+
   Map<String, dynamic> toJson() => _$ItemNoteModelToJson(this);
 
   static List<ItemNoteModel> convertToList(List<dynamic> json) {
@@ -32,6 +26,6 @@ class ItemNoteModel {
     return json
         .map<ItemNoteModel>((item) => ItemNoteModel.fromJson(item))
         .toList();
-    // post này là từng intem   ------------- post này là  để ấy vào trong fromjson trong factory rồi chuyển thành list
+    // post này là từng instance   ------------- post này là  để ấy vào trong fromjson trong factory rồi chuyển thành list
   }
 }

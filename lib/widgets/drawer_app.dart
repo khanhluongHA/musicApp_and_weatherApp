@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_bloc/cubit/login_cubit.dart';
+import 'package:test_bloc/cubit/note_cubit.dart';
 import 'package:test_bloc/models/item_drawer_model.dart';
 import 'package:test_bloc/screens/audio_player_page/audio_player_page.dart';
 import 'package:test_bloc/screens/note_page/login_screen.dart';
@@ -16,6 +17,7 @@ class DrawerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loginCubit = context.read<LoginCubit>();
+    final noteCubit = context.read<NoteCubit>();
 
     final List<ItemDrawerModel> itemDrawers = [
       ItemDrawerModel(
@@ -54,6 +56,8 @@ class DrawerApp extends StatelessWidget {
       ItemDrawerModel(
           icon: Icons.logout,
           onPressed: () {
+            noteCubit.deleteDataWhenLogout();
+
             loginCubit.logout();
 
             Navigator.pushReplacement(
@@ -87,15 +91,15 @@ class DrawerApp extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              const Column(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Tên ...',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
+                    '${loginCubit.state.user?.userName}',
+                    style: const TextStyle(color: Colors.white, fontSize: 18),
                   ),
-                  Text(
+                  const Text(
                     '0987654321',
                     style: TextStyle(color: Colors.white, fontSize: 13),
                   ),

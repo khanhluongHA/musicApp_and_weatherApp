@@ -70,4 +70,15 @@ class NoteCubit extends Cubit<NoteCubitState> {
 
     emit(state.copyWith(notes: newNotes));
   }
+
+  Future<void> deleteDataWhenLogout() async {
+    emit(state.copyWith(status: NoteStatus.start));
+
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+
+    sharedPreferences.remove(SaveData.saveNotes);
+    newNotes.clear();
+    emit(state.copyWith(status: NoteStatus.end, notes: newNotes));
+  }
 }
