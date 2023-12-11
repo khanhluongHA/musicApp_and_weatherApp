@@ -127,13 +127,13 @@ class _DetailNoteState extends State<DetailNote> {
                         ? Image(
                             image: NetworkImage(
                                 state.notes[widget.index].linkImage),
-                            height: 100,
-                            width: 100,
+                            height: 200,
+                            width: 200,
                             fit: BoxFit.fill,
                           )
                         : const SizedBox(),
                   ),
-                  Expanded(child: SizedBox()),
+                  const Expanded(child: SizedBox()),
                   Center(
                     child: SizedBox(
                         width: MediaQuery.of(context).size.width * 0.5,

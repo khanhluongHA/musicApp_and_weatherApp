@@ -24,11 +24,8 @@ class _WaterScreenState extends State<WaterScreen> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
-          print(waterCubit.state.a);
-
           waterCubit.addWater('8', 'mận', 12000);
           waterCubit.addListObjects();
-          print(waterCubit.state.a);
         },
       ),
       body: BlocBuilder<WaterCubit, WaterState>(
@@ -45,9 +42,7 @@ class _WaterScreenState extends State<WaterScreen> {
                   },
                   itemBuilder: (context, index) {
                     return InkWell(
-                      onTap: () {
-                      
-                      },
+                      onTap: () {},
                       child: Container(
                         margin: const EdgeInsets.all(10),
                         width: MediaQuery.of(context).size.width,

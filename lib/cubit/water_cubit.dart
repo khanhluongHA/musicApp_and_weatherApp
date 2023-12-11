@@ -30,7 +30,10 @@ class WaterCubit extends Cubit<WaterState> {
     newWater[id] = ItemWater(id: id, name: name, price: price);
     newIds.add(id);
     emit(state.copyWith(
-        ids: newIds, waterMap: newWater, status: WaterStatus.success, a: 5));
+      ids: newIds,
+      waterMap: newWater,
+      status: WaterStatus.success,
+    ));
   }
 
   void addListObjects() {

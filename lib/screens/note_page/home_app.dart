@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test_bloc/cubit/login_cubit.dart';
 import 'package:test_bloc/cubit/note_cubit.dart';
 import 'package:test_bloc/models/item_note_model.dart';
 import 'package:test_bloc/screens/note_page/add_note.dart';
@@ -23,12 +24,16 @@ class _HomeAppState extends State<HomeApp> {
   TextEditingController contentUpdateController = TextEditingController();
 
   late NoteCubit noteCubit;
+  late LoginCubit loginCubit;
 
   @override
   void initState() {
     super.initState();
     noteCubit = context.read<NoteCubit>();
+    loginCubit = context.read<LoginCubit>();
+
     noteCubit.getData();
+    loginCubit.getUserLocal();
   }
 
   @override

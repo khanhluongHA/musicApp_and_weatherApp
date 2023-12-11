@@ -7,8 +7,6 @@ part of 'water_state.dart';
 // **************************************************************************
 
 abstract class _$WaterStateCWProxy {
-  WaterState a(int a);
-
   WaterState ids(List<String> ids);
 
   WaterState status(Enum status);
@@ -22,7 +20,6 @@ abstract class _$WaterStateCWProxy {
   /// WaterState(...).copyWith(id: 12, name: "My name")
   /// ````
   WaterState call({
-    int? a,
     List<String>? ids,
     Enum? status,
     Map<String, dynamic>? waterMap,
@@ -34,9 +31,6 @@ class _$WaterStateCWProxyImpl implements _$WaterStateCWProxy {
   final WaterState _value;
 
   const _$WaterStateCWProxyImpl(this._value);
-
-  @override
-  WaterState a(int a) => this(a: a);
 
   @override
   WaterState ids(List<String> ids) => this(ids: ids);
@@ -57,16 +51,11 @@ class _$WaterStateCWProxyImpl implements _$WaterStateCWProxy {
   /// WaterState(...).copyWith(id: 12, name: "My name")
   /// ````
   WaterState call({
-    Object? a = const $CopyWithPlaceholder(),
     Object? ids = const $CopyWithPlaceholder(),
     Object? status = const $CopyWithPlaceholder(),
     Object? waterMap = const $CopyWithPlaceholder(),
   }) {
     return WaterState(
-      a: a == const $CopyWithPlaceholder() || a == null
-          ? _value.a
-          // ignore: cast_nullable_to_non_nullable
-          : a as int,
       ids: ids == const $CopyWithPlaceholder() || ids == null
           ? _value.ids
           // ignore: cast_nullable_to_non_nullable
