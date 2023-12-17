@@ -4,6 +4,7 @@ import 'package:test_bloc/bloc/weather_bloc.dart';
 import 'package:test_bloc/cubit/login_cubit.dart';
 import 'package:test_bloc/cubit/music_cubit.dart';
 import 'package:test_bloc/cubit/note_cubit.dart';
+import 'package:test_bloc/cubit/note_realtime_cubit.dart';
 import 'package:test_bloc/cubit/register_cubit.dart';
 import 'package:test_bloc/cubit/timer_cubit.dart';
 import 'package:test_bloc/cubit/water_cubit.dart';
@@ -13,6 +14,7 @@ import 'package:firebase_core/firebase_core.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -49,6 +51,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => MusicCubit(),
+        ),
+        BlocProvider(
+          create: (context) => NoteRealtimeCubit(),
         ),
       ],
       child: const MaterialApp(

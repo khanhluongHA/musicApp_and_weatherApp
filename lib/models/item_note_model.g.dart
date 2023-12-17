@@ -8,6 +8,7 @@ part of 'item_note_model.dart';
 
 ItemNoteModel _$ItemNoteModelFromJson(Map<String, dynamic> json) =>
     ItemNoteModel(
+      id: json['id'] as int?,
       title: json['title'] as String? ?? '',
       content: json['content'] as String? ?? '',
       time: json['time'] as String? ?? '',
@@ -17,6 +18,7 @@ ItemNoteModel _$ItemNoteModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$ItemNoteModelToJson(ItemNoteModel instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'title': instance.title,
       'content': instance.content,
       'time': instance.time,

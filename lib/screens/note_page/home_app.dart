@@ -63,7 +63,6 @@ class _HomeAppState extends State<HomeApp> {
             return Container(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
-              decoration: const BoxDecoration(),
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -101,7 +100,7 @@ class _HomeAppState extends State<HomeApp> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => DetailNote(
-                                          index: index,
+                                          note: noteCubit.state.notes[index],
                                         ),
                                       ),
                                     );

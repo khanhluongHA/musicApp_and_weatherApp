@@ -3,28 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_bloc/config/app_color.dart';
 import 'package:test_bloc/config/app_size.dart';
 import 'package:test_bloc/cubit/note_cubit.dart';
+import 'package:test_bloc/models/item_note_model.dart';
 
-class DetailNote extends StatefulWidget {
-  const DetailNote({
+class DetailNote extends StatelessWidget {
+   DetailNote({
     super.key,
-    this.index = 0,
+    required this.note
   });
-  final int index;
+  final ItemNoteModel note;
 
-  @override
-  State<DetailNote> createState() => _DetailNoteState();
-}
-
-class _DetailNoteState extends State<DetailNote> {
-  late NoteCubit cubit;
   bool isAppear = false;
-
-  @override
-  void initState() {
-    cubit = context.read<NoteCubit>();
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +57,7 @@ class _DetailNoteState extends State<DetailNote> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Ngày: ${state.notes[widget.index].time}',
+                        'Ngày: ${note.time}',
                         style: const TextStyle(
                             fontSize: AppSize.size15, color: Colors.grey),
                       ),
@@ -84,11 +72,11 @@ class _DetailNoteState extends State<DetailNote> {
                             height: 5,
                           ),
                           Text(
-                            state.notes[widget.index].noteStatus
+                           note.noteStatus
                                 ? ' Đã làm'
                                 : 'Chưa làm',
                             style: TextStyle(
-                                color: state.notes[widget.index].noteStatus
+                                color:note.noteStatus
                                     ? AppColors.green
                                     : Colors.red,
                                 fontSize: AppSize.size15),
@@ -107,7 +95,7 @@ class _DetailNoteState extends State<DetailNote> {
                   const SizedBox(
                     height: 5,
                   ),
-                  Text(state.notes[widget.index].title),
+                  Text(note.title),
                   const SizedBox(
                     height: 20,
                   ),
@@ -118,15 +106,15 @@ class _DetailNoteState extends State<DetailNote> {
                   const SizedBox(
                     height: 5,
                   ),
-                  Text(state.notes[widget.index].content),
+                  Text(note.content),
                   const SizedBox(
                     height: 10,
                   ),
                   Center(
-                    child: state.notes[widget.index].linkImage.isNotEmpty
+                    child: note.linkImage.isNotEmpty
                         ? Image(
                             image: NetworkImage(
-                                state.notes[widget.index].linkImage),
+                                note.linkImage),
                             height: 200,
                             width: 200,
                             fit: BoxFit.fill,

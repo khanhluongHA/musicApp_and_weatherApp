@@ -5,6 +5,7 @@ import 'package:test_bloc/cubit/note_cubit.dart';
 import 'package:test_bloc/models/item_drawer_model.dart';
 import 'package:test_bloc/screens/audio_player_page/audio_player_page.dart';
 import 'package:test_bloc/screens/note_page/login_screen.dart';
+import 'package:test_bloc/screens/note_realtime/notes_lis.dart';
 import 'package:test_bloc/screens/timer_page/input_time.dart';
 import 'package:test_bloc/screens/weather_page/wather_page.dart';
 import 'package:test_bloc/widgets/item_drawer.dart';
@@ -53,6 +54,17 @@ class DrawerApp extends StatelessWidget {
             );
           },
           title: 'Music app'),
+      ItemDrawerModel(
+          icon: Icons.update,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const NotesList(),
+              ),
+            );
+          },
+          title: 'Note realtime'),
       ItemDrawerModel(
           icon: Icons.logout,
           onPressed: () {

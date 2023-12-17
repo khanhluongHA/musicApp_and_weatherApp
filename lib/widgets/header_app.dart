@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class HeaderApp extends StatelessWidget {
-  const HeaderApp({super.key, this.title = '', this.color = Colors.black, required this.callback});
+  const HeaderApp(
+      {super.key,
+      this.title = '',
+      this.color = Colors.black,
+      required this.callback});
 
   final String title;
   final Color color;
@@ -17,7 +21,6 @@ class HeaderApp extends StatelessWidget {
           InkWell(
             onTap: () {
               callback.call();
-             
             },
             child: Icon(
               Icons.arrow_back,
