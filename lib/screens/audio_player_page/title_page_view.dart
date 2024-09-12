@@ -67,7 +67,7 @@ class TitlePageView extends StatelessWidget {
               height: 20,
             )
           ]),
-          SizedBox(
+          const SizedBox(
             height: 40,
             width: 40,
           )

@@ -5,7 +5,6 @@ import 'package:test_bloc/cubit/note_realtime_cubit.dart';
 import 'package:test_bloc/cubit/note_realtime_state.dart';
 import 'package:test_bloc/screens/note_page/ditail_note.dart';
 import 'package:test_bloc/screens/note_realtime/note_realtime_screen.dart';
-import 'package:test_bloc/widgets/alert_dialog_note.dart';
 import 'package:test_bloc/widgets/alert_dialog_note_realtime.dart';
 import 'package:test_bloc/widgets/header_app.dart';
 import 'package:test_bloc/widgets/item_note.dart';

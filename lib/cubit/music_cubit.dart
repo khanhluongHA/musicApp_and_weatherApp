@@ -14,7 +14,6 @@ void getMaxDuration() {
     });
   });
 }
-
 class MusicCubit extends Cubit<MusicState> {
   MusicCubit() : super(MusicState());
 
@@ -80,7 +79,6 @@ class MusicCubit extends Cubit<MusicState> {
       await player.play(AssetSource(musics[state.currentMusic].path));
     } else {
       emit(state.copyWith(status: MusicStatus.start));
-
       emit(
         state.copyWith(
             currentMusic: state.currentMusic - 1,

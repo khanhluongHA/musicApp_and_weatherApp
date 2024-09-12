@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_bloc/cubit/note_realtime_cubit.dart';
-import 'package:test_bloc/screens/note_page/home_app.dart';
 import 'package:test_bloc/widgets/header_app.dart';
 
 class NoteRealtimeScreen extends StatefulWidget {

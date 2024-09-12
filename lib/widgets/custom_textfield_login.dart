@@ -25,22 +25,22 @@ class CustomTextfieldLogin extends StatelessWidget {
           labelText: labelText,
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                width: 1, color: Colors.grey.withOpacity(0.6)), //<-- SEE HERE
+                width: 1, color: Colors.grey.withOpacity(0.6)),
             borderRadius: BorderRadius.circular(10.0),
           ),
           border: OutlineInputBorder(
             borderSide:
-                const BorderSide(width: 1, color: Colors.grey), //<-- SEE HERE
+                const BorderSide(width: 1, color: Colors.grey),
             borderRadius: BorderRadius.circular(10.0),
           ),
           errorBorder: OutlineInputBorder(
             borderSide:
-                const BorderSide(width: 1, color: Colors.red), //<-- SEE HERE
+                const BorderSide(width: 1, color: Colors.red),
             borderRadius: BorderRadius.circular(10.0),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide:
-                const BorderSide(width: 1, color: Colors.black), //<-- SEE HERE
+                const BorderSide(width: 1, color: Colors.black),
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),

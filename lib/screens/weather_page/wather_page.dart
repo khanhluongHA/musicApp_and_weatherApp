@@ -28,7 +28,6 @@ class _WeatherPageState extends State<WeatherPage> {
     for (int i = 0; i < 5; i++) {
       var lastDay = time.add(Duration(days: i));
       var day = DateFormat('d/M/yyyy').format(lastDay);
-      // var day = lastDay.toString().split(' ');
       days.add(day);
     }
   }
@@ -149,7 +148,7 @@ class _WeatherPageState extends State<WeatherPage> {
                           height: 10,
                         );
                       },
-                      itemCount: 5,
+                      itemCount: days.length,
                       itemBuilder: (context, index) {
                         return Container(
                           padding: const EdgeInsets.only(
@@ -164,7 +163,7 @@ class _WeatherPageState extends State<WeatherPage> {
                             children: [
                               Text(
                                 '${days[index]}',
-                                style: TextStyle(color: Colors.black),
+                                style: const TextStyle(color: Colors.black),
                               ),
                               const SizedBox(
                                 height: 20,
@@ -186,7 +185,7 @@ class _WeatherPageState extends State<WeatherPage> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               Text(

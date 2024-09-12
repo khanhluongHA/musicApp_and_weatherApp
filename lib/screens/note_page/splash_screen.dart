@@ -5,7 +5,6 @@ import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_bloc/config/save_data.dart';
 import 'package:test_bloc/screens/note_page/home_app.dart';
-import 'package:test_bloc/screens/note_page/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -29,12 +28,12 @@ class _SplashScreenState extends State<SplashScreen> {
         } else {
           // ignore: use_build_context_synchronously
           Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()));
+              MaterialPageRoute(builder: (context) => const HomeApp()));
         }
       } else {
         // ignore: use_build_context_synchronously
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const LoginScreen()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const HomeApp()));
       }
     });
   }

@@ -61,24 +61,24 @@ class _SearchCityState extends State<SearchCity> {
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.85,
-              height: 45,
+              height: 55,
               child: TextFormField(
                 controller: _controller,
                 decoration: InputDecoration(
                   hintText: 'Nhập tên thành phố',
                   focusedBorder: OutlineInputBorder(
                     borderSide: const BorderSide(
-                        width: 1, color: Colors.greenAccent), //<-- SEE HERE
+                        width: 1, color: Colors.grey), //<-- SEE HERE
                     borderRadius: BorderRadius.circular(50.0),
                   ),
                   errorBorder: OutlineInputBorder(
                     borderSide: const BorderSide(
-                        width: 1, color: Colors.greenAccent), //<-- SEE HERE
+                        width: 1, color: Colors.grey), //<-- SEE HERE
                     borderRadius: BorderRadius.circular(50.0),
                   ),
                   border: OutlineInputBorder(
                     borderSide: const BorderSide(
-                        width: 1, color: Colors.greenAccent), //<-- SEE HERE
+                        width: 1, color: Colors.grey), //<-- SEE HERE
                     borderRadius: BorderRadius.circular(50.0),
                   ),
                   enabledBorder: OutlineInputBorder(

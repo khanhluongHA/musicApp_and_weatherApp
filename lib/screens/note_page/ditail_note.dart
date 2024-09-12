@@ -5,6 +5,7 @@ import 'package:test_bloc/config/app_size.dart';
 import 'package:test_bloc/cubit/note_cubit.dart';
 import 'package:test_bloc/models/item_note_model.dart';
 
+// ignore: must_be_immutable
 class DetailNote extends StatelessWidget {
    DetailNote({
     super.key,

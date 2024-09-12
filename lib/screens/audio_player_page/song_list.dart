@@ -14,7 +14,7 @@ class SongList extends StatefulWidget {
   State<SongList> createState() => _SongListState();
 }
 
-class _SongListState extends State<SongList> {
+class _SongListState extends State<SongList>{
   late MusicCubit musicCubit;
   late int indexSelect;
 
