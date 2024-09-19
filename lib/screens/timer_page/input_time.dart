@@ -35,7 +35,7 @@ class _InputTimeState extends State<InputTime> {
           child: Column(
             children: [
               HeaderApp(
-                title: 'Timer app',
+                title: 'Timer App',
                 callback: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const HomeApp()));
@@ -51,7 +51,7 @@ class _InputTimeState extends State<InputTime> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        'Giờ',
+                        'hour',
                         style: TextStyle(
                           fontSize: 25,
                         ),
@@ -72,7 +72,7 @@ class _InputTimeState extends State<InputTime> {
                   Column(
                     children: [
                       const Text(
-                        'Phút',
+                        'minute',
                         style: TextStyle(
                           fontSize: 25,
                         ),
